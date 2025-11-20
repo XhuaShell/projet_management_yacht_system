@@ -7,7 +7,7 @@ services:
             - 3300:3306
         environment:
             MYSQL_ROOT_PASSWORD: 123456
-            MYSQL_DATABASE: yacht-database 
+            MYSQL_DATABASE: club_yates_db 
             MYSQL_USER: administrator          
             MYSQL_PASSWORD: 123456  
         volumes:

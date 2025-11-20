@@ -41,7 +41,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="pH61L16NLLB6m91ruu-5" name="entity_relationship">
-    <mxGraphModel dx="1335" dy="929" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1882" dy="1266" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -94,13 +94,14 @@
         <mxCell id="5p5sX-_YwZiRVSyBvQHN-64" value="ASIGNAR" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
           <mxGeometry x="-795" y="-663" width="101" height="50.5" as="geometry" />
         </mxCell>
-        <mxCell id="5p5sX-_YwZiRVSyBvQHN-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="5p5sX-_YwZiRVSyBvQHN-267" target="5p5sX-_YwZiRVSyBvQHN-76" edge="1">
+        <mxCell id="5p5sX-_YwZiRVSyBvQHN-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="5p5sX-_YwZiRVSyBvQHN-267" target="5p5sX-_YwZiRVSyBvQHN-76" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="37.02564102564088" y="-381.01282051282044" as="sourcePoint" />
             <mxPoint x="-45" y="-103.05263157894728" as="targetPoint" />
             <Array as="points">
               <mxPoint x="-36" y="-334" />
-              <mxPoint x="-143" y="-334" />
+              <mxPoint x="-125" y="-334" />
+              <mxPoint x="-125" y="-307" />
             </Array>
           </mxGeometry>
         </mxCell>
