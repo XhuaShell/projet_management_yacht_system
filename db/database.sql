@@ -111,3 +111,6 @@ CREATE TABLE VENTA (
     
     CHECK (vendedor_cedula <> comprador_cedula)
 );
+
+
+SHOW DATABASES;
