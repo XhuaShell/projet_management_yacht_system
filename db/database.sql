@@ -85,7 +85,7 @@ CREATE TABLE ASIGNACION_AMARRE (
     UNIQUE KEY uk_amarre_activo (num_amarre, fecha_inicio, fecha_fin)
 );
 
-CREATE TABLE PAGO (
+CREATE TABLE pago (
     id_pago INT PRIMARY KEY AUTO_INCREMENT,
     socio_cedula VARCHAR(20) NOT NULL,
     fecha_realizacion DATETIME NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE PAGO (
     FOREIGN KEY (socio_cedula) REFERENCES SOCIO(cedula)
 );
 
-CREATE TABLE VENTA (
+CREATE TABLE venta (
     num_venta INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE NOT NULL,
     monto DECIMAL(10, 2) NOT NULL,
@@ -111,6 +111,8 @@ CREATE TABLE VENTA (
     
     CHECK (vendedor_cedula <> comprador_cedula)
 );
+
+CREATE TABLE usar 
 
 
 SHOW DATABASES;
