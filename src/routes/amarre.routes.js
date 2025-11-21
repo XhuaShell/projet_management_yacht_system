@@ -2,5 +2,6 @@ import { Router } from "express";
 
 const router =  Router();
 
+router.get('/amarre', (req, res) => {res.send('Hola')});
 
 export default router;
