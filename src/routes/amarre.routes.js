@@ -2,6 +2,16 @@ import { Router } from "express";
 
 const router =  Router();
 
-router.get('/amarre', (req, res) => {res.send('Hola')});
+
+router.route('/amarre')
+    .get((req, res) => {
+        res.send('GET ejecutado');
+    })
+    .post((req, res) => {
+        res.send('POST ejecutado');
+    })
+    .delete((req, res) => {
+        res.send('DELETE ejecutado');
+    });
 
 export default router;
