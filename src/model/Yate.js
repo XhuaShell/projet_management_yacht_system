@@ -9,14 +9,6 @@ export class Yate {
     #empleado_cargo;
 
     constructor(yate = {}) {
-        // Validaciones duras como en la plantilla Usuario
-        if (
-            typeof yate.matricula !== "string" ||
-            typeof yate.nombre !== "string"
-        ) {
-            throw new Error("Información no ingresada correctamente");
-        }
-
         this.matricula = yate.matricula ?? null;
         this.nombre = yate.nombre ?? null;
         this.eslora = yate.eslora ?? null;

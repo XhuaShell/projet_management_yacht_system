@@ -5,7 +5,7 @@ export const str = (v) => {
 export const float = (v) => {
     if (v === undefined || v === null || v === "") return null;
     const n = parseFloat(v);
-    return Number.isNaN(n) ? null : n;
+    return Number.isNaN(n) ? null : parseFloat(v);
 };
 
 export const int = (v) => {
