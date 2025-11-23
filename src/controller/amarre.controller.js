@@ -36,13 +36,14 @@ export const create=async(req,res) => {
     fecha_compra
     }=req.body;
 
-    const nuevo_Usuario = new Amarre({
-    num_amarre,
-    id_zona,
-    usuario_propietario_cedula,
-    fecha_compra
+    const amarre = new Amarre({
+    num_amarre: Number(req.body.num_amarre),
+    id_zona: req.body.id_zona,
+    usuario_propietario_cedula: req.body.usuario_propietario_cedula, 
+    fecha_compra: req.body.fecha_compra
     });
-    BD.save(nuevo_Usuario);
+
+    BD.save(amarre);
     res.redirect(`/${nombreP}/main`);
 } 
 //consulta get
