@@ -91,7 +91,7 @@ export const parch = async (req, res) => {
     // Actualizar usando BD.put
     const empleadoActualizado = await BD.put(codigo, data);
 
-    res.redirect(`${nombre}/main`)
+    res.redirect(`/${nombre}/main`)
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error al actualizar Empleado: ${err.message}`);

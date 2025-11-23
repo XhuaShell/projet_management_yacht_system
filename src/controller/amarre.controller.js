@@ -70,7 +70,7 @@ export const parch = async (req, res) => {
 
   try {
     // Buscar al socio por código para validar existencia
-    const socioExistente = await BD.findById(codigo);
+    const socioExistente = await BD.findByNum(codigo);
     if (!socioExistente) {
       return res.status(404).send("Amarre no encontrado");
     }
@@ -84,7 +84,7 @@ export const parch = async (req, res) => {
     // Actualizar usando BD.put
     const AmarreActualizado = await BD.put(codigo, data);
 
-    res.redirect(`${nombre}/main`)
+    res.redirect(`/${nombreP}/main`)
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error al actualizar Empleado: ${err.message}`);

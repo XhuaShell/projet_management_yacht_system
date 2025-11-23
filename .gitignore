@@ -1,2 +1,5 @@
 /node_modules
 /mysql
+/docs/promtDecadente.txt
+/docs/promtDecadenteTest.txt
+/src/config.js
