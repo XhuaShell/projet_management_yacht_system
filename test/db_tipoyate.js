@@ -37,7 +37,6 @@ try {
 
 console.log("\n📌 Tipos insertados correctamente.\n");
 
-/*
 // ===============================
 //     PROBAR REGLA DE NOMBRE ÚNICO (save)
 // ===============================
@@ -63,11 +62,11 @@ try {
 console.log("\n=== PROBANDO CONSULTAS ===\n");
 
 let tipoVela = await REPOSITORY.TipoYateRepository.findByNombre("Yate a Vela");
-console.log("🔎 Encontrado por Nombre ('Yate a Vela'):", tipoVela.toJSON());
+console.log("🔎 Encontrado por Nombre ('Yate a Vela'):", tipoVela);
 
 const idCatamaran = 2; // Asumiendo que el ID del Catamarán es 2
 let tipoCatamaran = await REPOSITORY.TipoYateRepository.findById(idCatamaran);
-console.log(`🔎 Encontrado por ID (${idCatamaran}):`, tipoCatamaran.toJSON());
+console.log(`🔎 Encontrado por ID (${idCatamaran}):`, tipoCatamaran);
 
 // ===============================
 //     PROBAR ACTUALIZACIÓN (put)
@@ -112,4 +111,4 @@ console.log("\n📌 TIPOS DE YATE FINALES EN BD:");
 let tiposFinales = await REPOSITORY.TipoYateRepository.getAll();
 tiposFinales.forEach((t) => console.log(t.toJSON()));
 
-console.log("\n🏁 TEST COMPLETO FINALIZADO. 💀\n");*/
+console.log("\n🏁 TEST COMPLETO FINALIZADO. 💀\n");
