@@ -7,14 +7,11 @@
   <h1>Registrar Socio</h1>
   <form action="/socio/formulario" method="POST">
 
-    <label for="codigo">Codigo de socio:</label>
-    <input type="text" id="codigo" name="codigo" required><br><br>
-
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required><br><br>
 
     <label for="cedula">Cedula:</label>
-    <input type="number" id="cedula" name="cedula" required><br><br>
+    <input type="text" id="cedula" name="cedula" required><br><br>
 
     <label for="fecha_vinculacion">Fecha de Vinculacion:</label>
     <input type="date" id="fecha_vinculacion" name="fecha_vinculacion" required><br><br>
@@ -24,6 +21,14 @@
 
     <label for="telefono">Numero telefonico:</label>
     <input type="number" id="telefono" name="telefono" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+
+     <label for="contraseña">Contraseña:</label>
+    <input type="text" id="contraseña" name="contraseña" required><br><br>
+    
 
     <button type="submit">Enviar</button>
   </form>

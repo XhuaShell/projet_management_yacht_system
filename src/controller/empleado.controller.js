@@ -1,5 +1,5 @@
 import {empleados} from '../repository/pruebaArray.js';
-import {Empleado} from '../model/empleado.js'
+import {Empleado} from '../model/Empleado.js'
 import { render } from 'ejs';
 
 

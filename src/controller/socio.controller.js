@@ -1,6 +1,9 @@
 import {socios} from '../repository/pruebaArray.js';
 import {Socio} from '../model/socio.js'
+import {UsuarioMysqlRepository} from '../repository/mysql/UsuarioMysqlRepository.js'
 import { render } from 'ejs';
+import { Usuario } from '../model/Usuario.js';
+const BD = new UsuarioMysqlRepository();
 
 
 //req a server 
@@ -21,12 +24,19 @@ export const mostrarEliminacionSocio=(req,res)=>{
 
 
 //req a BD
-export const createSocio=(req,res) => {
-    const {codigo,nombre,cedula,fecha_vinculacion,direccion,telefono}=req.body;
-    const nuevo_socio=new Socio(codigo,nombre,cedula,fecha_vinculacion,direccion,telefono);
-    socios.push(nuevo_socio);
-    console.log(socios);
-    res.redirect('/socio');
+export const createSocio=async(req,res) => {
+    const {codigo,nombre,cedula,fecha_vinculacion,direccion,telefono,contraseña,email}=req.body;
+    const nuevo_Usuario = new Usuario({
+        cedula: String(cedula),
+        nombre,
+        direccion,
+        telefono,
+        fecha_vinculacion,
+        contrasena: String(contraseña),
+        mail: email,   // porque tu constructor lo exige
+        tipo_usuario: "sOCIO" // si quieres
+    });
+    BD.save(nuevo_Usuario);
 } 
 //consulta get
 export const getSocio=(req,res)=>{
