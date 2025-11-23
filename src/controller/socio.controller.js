@@ -1,13 +1,14 @@
 import {yates} from '../repository/pruebaArray.js';
+import {Socio} from '../model/socio.js'
+import { render } from 'ejs';
 
 export const getSocio=(req, res) => {
-    const dato=req.body;
-    console.log(dato);
-    res.send(`Socio ${dato.nombre}`);
+    res.render('formulario')
 };
 
 export const createSocio=(req,res) => {
-    const {}=req.body;
-
-
+    const {codigo,nombre,cedula,fecha_vinculacion,direccion,telefono}=req.body;
+    const nuevo_socio=new Socio(codigo,nombre,cedula,fecha_vinculacion,direccion,telefono);
+    yates.push(nuevo_socio);
+    console.log(yates)
 } 
