@@ -1,30 +1,25 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Formulario empleado</title>
+  <title>Formulario Actualizacion Amarre</title>
 </head>
 <body>
-  <h1>Editar empleado</h1>
-  <form action="/empleado/edicion?_method=PATCH" method="POST">
+  <h1>Editar Amarre</h1>
+  <form action="/amarre/edicion?_method=PATCH" method="POST">
 
 
-    <label for="codigo">Codigo de empleado:</label>
-    <input type="text" id="codigo" name="codigo" required><br><br>
+    <label for="num_amarre">Codigo de Amarre:</label>
+    <input type="text" id="num_amarre" name="num_amarre" required><br><br>
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" ><br><br>
+    <label for="id_zona">Cedula del propietario:</label>
+    <input type="text" id="id_zona" name="id_zona" required><br><br>
 
-    <label for="cedula">Cedula:</label>
-    <input type="number" id="cedula" name="cedula" ><br><br>
+    <label for="usuario_propietario_cedula">Nombre:</label>
+    <input type="" id="usuario_propietario_cedula" name="usuario_propietario_cedula" required><br><br>
 
-    <label for="fecha_vinculacion">Fecha de Vinculacion:</label>
-    <input type="date" id="fecha_vinculacion" name="fecha_vinculacion" ><br><br>
-    
-    <label for="direccion">Direccion:</label>
-    <input type="text" id="direccion" name="direccion" ><br><br>
-
-    <label for="telefono">Numero telefonico:</label>
-    <input type="number" id="telefono" name="telefono" ><br><br>
+    <label for="fecha_compra">fecha_compra:</label>
+    <input type="text" id="fecha_compra" name="fecha_compra" required><br><br>
 
     <button type="submit">Enviar</button>
   </form>
