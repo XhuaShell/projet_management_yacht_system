@@ -1,4 +1,4 @@
 // src/repository/globalYates.js
-export const yates = []; // tu "ArrayList"
+export const socios = []; // tu "ArrayList"
 
 

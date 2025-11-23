@@ -1,21 +1,43 @@
 import { Router } from "express";
-import { getFormularioSocio } from '../controller/socio.controller.js';
-import { createSocio } from '../controller/socio.controller.js';
-import { getSocio } from '../controller/socio.controller.js';
+import { 
+    mostrarFormularioSocio, 
+    mostrarListaSocio,
+    mostrarActualizacionSocio,
+    mostrarEliminacionSocio
+
+} from '../controller/socio.controller.js';
+
+import { 
+    createSocio,
+    parchSocio,
+    deleteSocio
+} from '../controller/socio.controller.js';
+
+
 const router =  Router();
 
-
+// Vista
 // Mostrar el formulario
-router.get('/socio/formulario', getFormularioSocio);
-
+router.get('/socio/formulario', mostrarFormularioSocio);
 // Listar todos los socios
-router.get('/socio/lista', getSocio);
+router.get('/socio/lista', mostrarListaSocio);
+////update
+router.get('/socio/edicion', mostrarActualizacionSocio);
+//mostrar delete
+router.get('/socio/delete',mostrarEliminacionSocio);
 
+
+//API
 // Crear un socio (POST)
 router.post('/socio/formulario', createSocio);
+//actualizaSocio
+router.patch('/socio/edicion',parchSocio);
+//delete
+router.delete('/socio/delete',deleteSocio);
 
-// Eliminar (DELETE)
-/*router.delete('/socio', deleteSocio);*/
+
+
+
         
 
 export default router;

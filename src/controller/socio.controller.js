@@ -1,20 +1,78 @@
-import {yates} from '../repository/pruebaArray.js';
+import {socios} from '../repository/pruebaArray.js';
 import {Socio} from '../model/socio.js'
 import { render } from 'ejs';
 
-//pagina
-export const getFormularioSocio=(req, res) => {
-    res.render('formulario')
-};
 
+//req a server 
+export const mostrarFormularioSocio=(req, res) => {
+    res.render('socio/Formulario',)
+};
+export const mostrarListaSocio=(req,res) =>{
+    //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
+    res.render('socio/ListadeSocios',{socios})
+}
+export const mostrarActualizacionSocio=(req,res)=>{
+    res.render('socio/FormularioEdicion')
+}
+export const mostrarEliminacionSocio=(req,res)=>{
+    res.render('socio/Deleter')
+}
+
+
+
+//req a BD
 export const createSocio=(req,res) => {
     const {codigo,nombre,cedula,fecha_vinculacion,direccion,telefono}=req.body;
     const nuevo_socio=new Socio(codigo,nombre,cedula,fecha_vinculacion,direccion,telefono);
-    yates.push(nuevo_socio);
-    console.log(yates);
-    res.redirect('/index');
+    socios.push(nuevo_socio);
+    console.log(socios);
+    res.redirect('/socio');
 } 
+//consulta get
+export const getSocio=(req,res)=>{
 
-export const getSocio=(req,res) =>{
-    res.send(yates);
 }
+
+//consulta update
+export const parchSocio=(req, res) => {
+    const { codigo, nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
+
+    // Buscar el socio por código (convertir a número si tu código es número)
+    const indice = socios.findIndex(s => s.codigo == codigo);
+
+    if (indice === -1) {
+        return res.send("Socio no encontrado");
+    }
+
+    // Modificar SOLO si el dato fue enviado y no está vacío
+    if (nombre) socios[indice].nombre = nombre;
+    if (cedula) socios[indice].cedula = cedula;
+    if (fecha_vinculacion) socios[indice].fecha_vinculacion = fecha_vinculacion;
+    if (direccion) socios[indice].direccion = direccion;
+    if (telefono) socios[indice].telefono = telefono;
+
+    console.log("SOCIO ACTUALIZADO:", socios[indice]);
+
+    res.send("Socio actualizado correctamente");
+};
+
+//delete de socio
+export const deleteSocio=(req, res) => {
+    const { codigo, nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
+
+    // Buscar el socio por código (convertir a número si tu código es número)
+    const indice = socios.findIndex(s => s.codigo == codigo);
+
+    if (indice === -1) {
+        return res.send("Socio no encontrado");
+    }
+
+    socios.splice(indice,1);
+
+    console.log("SOCIO eliminado:", socios[indice]);
+
+    res.send("Socio eliminado correctamente");
+};
+
+
+

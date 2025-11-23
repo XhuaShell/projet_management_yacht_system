@@ -15,6 +15,7 @@ import indexRouter from "./routes/index.routes.js";
 import pagoRouter from "./routes/pago.routes.js";
 import socioRouter from "./routes/socio.routes.js";
 import yateRouter from "./routes/yate.routes.js";
+import methodOverride from "method-override";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -25,6 +26,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 app.use(amarreRouter);
 app.use(asignacionRouter);
