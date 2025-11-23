@@ -3,6 +3,8 @@ import { ping } from '../controller/index.controller.js'
 
 const router =  Router();
 
-router.get('/ping', ping)
+router.get('/', (req, res) => {
+    res.render('index');
+})
 
 export default router;
