@@ -1,5 +1,6 @@
 // Las clases implementadas, éstas son las que cambian dependiendo de la fuente de datos
 import { AmarreMysqlRepository } from "./repository/mysql/AmarreMysqlRepository.js";
+import { TipoYateMysqlRepository } from "./repository/mysql/TipoYateMysqlRepository.js";
 import { UsuarioMysqlRepository } from "./repository/mysql/UsuarioMysqlRepository.js"
 import { ZonaMsqlRepository } from "./repository/mysql/ZonaMysqlRepository.js";
 
@@ -11,7 +12,8 @@ const repositoryFactory = (type) => {
             return {
                 UsuarioRepository:  new UsuarioMysqlRepository(),
                 ZonaRepository: new ZonaMsqlRepository(),
-               /* AmarreRepository: new AmarreMysqlRepository(),*/
+                AmarreRepository: new AmarreMysqlRepository(),
+                TipoYateRepository: new TipoYateMysqlRepository()
             } 
         case 'postgres':{}
     }

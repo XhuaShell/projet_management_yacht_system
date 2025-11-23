@@ -11,7 +11,7 @@ export const float = (v) => {
 export const int = (v) => {
     if (v === undefined || v === null || v === "") return null;
     const n = parseInt(v);
-    return Number.isNaN(n) ? null : n;
+    return Number.isNaN(n) ? null : parseInt(v);
 };
 
 // Ésta la hizo chatgpt la verdad, no entiendo la mitad de ésta función.
