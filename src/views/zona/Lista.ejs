@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Amarre</title>
+</head>
+<body>
+
+<h1>Lista de Amarre Registrados</h1>
+
+<table border="1">
+  <tr>
+    <th>Numero de Amarre</th>
+    <th>Id de zona</th>
+    <th>Cédula del propietario</th>
+    <th>Fecha compra</th>
+  </tr>
+
+  <% objetosCons.forEach(s => { %>
+    <tr>
+      <td><%= s.num_amarre %></td>
+      <td><%= s.id_zona %></td>
+      <td><%= s.usuario_propietario_cedula %></td>
+      <td><%= s.fecha_compra %></td>
+    </tr>
+  <% }) %>
+
+</table>
+<form action="/amarre/lista/1" method="GET">
+  <button type="submit">Cargar lista</button>
+</form>
+
+<button> </button>
+
+</body>
+</html>

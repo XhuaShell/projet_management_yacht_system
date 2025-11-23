@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario Amarre</title>
+</head>
+<body>
+  <h1>Registrar Amarre</h1>
+  <form action="/zona/formulario" method="POST">
+
+<label for="id_zona">ID de la Zona:</label>
+<input type="text" id="id_zona" name="id_zona" required><br><br>
+
+<label for="cuota_administracion">Cuota de Administración:</label>
+<input type="number" step="0.01" id="cuota_administracion" name="cuota_administracion" required><br><br>
+
+<label for="capacidad">Capacidad:</label>
+<input type="number" id="capacidad" name="capacidad" required><br><br>
+
+<label for="profundidad">Profundidad:</label>
+<input type="number" step="0.01" id="profundidad" name="profundidad" required><br><br>
+
+<label for="dim_max_eslora">Dimensión Máxima Eslora:</label>
+<input type="number" step="0.01" id="dim_max_eslora" name="dim_max_eslora" required><br><br>
+
+<label for="dim_max_manga">Dimensión Máxima Manga:</label>
+<input type="number" step="0.01" id="dim_max_manga" name="dim_max_manga" required><br><br>
+
+<label for="dim_max_calado">Dimensión Máxima Calado:</label>
+<input type="number" step="0.01" id="dim_max_calado" name="dim_max_calado" required><br><br>
+
+<label for="dim_min_eslora">Dimensión Mínima Eslora:</label>
+<input type="number" step="0.01" id="dim_min_eslora" name="dim_min_eslora" required><br><br>
+
+<label for="dim_min_manga">Dimensión Mínima Manga:</label>
+<input type="number" step="0.01" id="dim_min_manga" name="dim_min_manga" required><br><br>
+
+<label for="dim_min_calado">Dimensión Mínima Calado:</label>
+<input type="number" step="0.01" id="dim_min_calado" name="dim_min_calado" required><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>
