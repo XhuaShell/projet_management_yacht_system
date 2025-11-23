@@ -1,7 +1,7 @@
 
 import {EmpleadoMysqlRepository} from '../repository/mysql/EmpleadoMysqlRepository.js'
 
-import { Usuario } from '../model/Usuario.js';
+import { Empleado } from '../model/Empleado.js';
 const nombreP="empleado"; 
 const BD = new EmpleadoMysqlRepository();
 
@@ -58,13 +58,19 @@ export const get=async(req,res)=>{
     res.render(`${nombreP}/Lista`, { objetosCons }); 
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error al obtener la lista de socios");
+    res.status(500).send("Error al obtener la lista de Empleados");
   }
 }
 
 //consulta update
 export const parch = async (req, res) => {
-  const { nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
+  const {id_empleado,
+        nombre,
+        salario,
+        direccion,
+        telefono,
+        correo
+      } = req.body;
   const codigo = req.body.cedula; // suponiendo que el código identifica al socio
 
   try {
@@ -77,20 +83,18 @@ export const parch = async (req, res) => {
     // Construir objeto con solo los campos enviados
     const data = {};
     if (nombre) data.nombre = nombre; 
+    if (salario) data.salario = salario;
     if (fecha_vinculacion) data.fecha_vinculacion = fecha_vinculacion;
     if (direccion) data.direccion = direccion;
     if (telefono) data.telefono = telefono;
 
     // Actualizar usando BD.put
-    const socioActualizado = await BD.put(codigo, data);
+    const empleadoActualizado = await BD.put(codigo, data);
 
-    res.send({
-      message: "Socio actualizado correctamente",
-      socio: socioActualizado
-    });
+    res.redirect(`${nombre}/main`)
   } catch (err) {
     console.error(err);
-    res.status(500).send(`Error al actualizar socio: ${err.message}`);
+    res.status(500).send(`Error al actualizar Empleado: ${err.message}`);
   }
 };
 
@@ -100,9 +104,9 @@ export const deleter=(req, res) => {
     
     BD.delete(codigo);
 
-    console.log("SOCIO eliminado:" );
+    console.log("Empleado eliminado:" );
 
-    res.send("Socio eliminado correctamente");
+    res.send("Empleado eliminado correctamente");
 };
 
 
