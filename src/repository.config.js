@@ -9,9 +9,7 @@ const repositoryFactory = (type) => {
             return {
                 UsuarioRepository:  new UsuarioMysqlRepository(),
             } 
-        case 'postgres':{
-
-        }
+        case 'postgres':{}
     }
 }
 
