@@ -3,11 +3,8 @@ import { ping } from '../controller/index.controller.js'
 
 const router =  Router();
 
-router.get('/', (req, res) => {
-   res.json({
-    name: 'jose',
-    apellido: 'castan'
-   })
+router.get('/index', (req, res) => {
+   res.send('esto es el index')
     //res.render('index');
 })
 
