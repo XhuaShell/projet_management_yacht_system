@@ -1,14 +1,13 @@
 import { Router } from "express";
-
+import { getSocio } from '../controller/socio.controller.js';
 const router =  Router();
 
+
 router.route('/socio')
-    .get((req, res) => {
-        res.send('GET ejecutado');
+    .get((req,res)=>{
+        res.render('formulario')
     })
-    .post((req, res) => {
-        res.send('POST ejecutado');
-    })
+    .post(getSocio)
     .delete((req, res) => {
         res.send('DELETE ejecutado');
     });
