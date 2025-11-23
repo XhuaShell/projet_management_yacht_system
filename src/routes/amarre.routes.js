@@ -1,7 +1,8 @@
 
 export const nombre="amarre"; 
 import { Router } from "express";
-const {mostrarFormulario, 
+const {
+    mostrarFormulario, 
     mostrarLista, 
     mostrarActualizacion, 
     mostrarEliminacion,

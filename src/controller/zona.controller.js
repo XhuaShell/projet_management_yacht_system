@@ -15,12 +15,12 @@ export const mostrarLista=(req,res) =>{
     //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
     res.render(`${nombreP}/Lista`, { objetosCons: [] }); // inicial vacío
 }
-export const mostrarActualizacion=(req,res)=>{
+/* export const mostrarActualizacion=(req,res)=>{
     res.render(`${nombreP}/FormularioEdicion`)
 }
 export const mostrarEliminacion=(req,res)=>{
     res.render(`${nombreP}/Deleter`)
-}
+} */
 export const mostrarmain=(req,res)=>{
     res.render(`${nombreP}/main`)
 }
@@ -30,21 +30,28 @@ export const mostrarmain=(req,res)=>{
 //req a BD
 export const create=async(req,res) => {
     const {
-    id_empleado,
-    cedula,
-    nombre,
-    salario,
-    direccion,
-    telefono,
-    correo}=req.body;
-    const nuevo_Usuario = new Empleado({
-        id_empleado,
-        cedula,
-        nombre,
-        salario,
-        direccion,
-        telefono,
-        correo
+    id_zona,
+    cuota_administracion,
+    capacidad,
+    profundidad,
+    dim_max_eslora,
+    dim_max_manga,
+    dim_max_calado,
+    dim_min_eslora,
+    dim_min_manga,
+    dim_min_calado
+    }=req.body;
+    const nuevo_Usuario = new Zona({
+    id_zona,
+    cuota_administracion,
+    capacidad,
+    profundidad,
+    dim_max_eslora,
+    dim_max_manga,
+    dim_max_calado,
+    dim_min_eslora,
+    dim_min_manga,
+    dim_min_calado
     });
     BD.save(nuevo_Usuario);
     res.redirect(`/${nombreP}/main`);
@@ -63,7 +70,7 @@ export const get=async(req,res)=>{
 }
 
 //consulta update
-export const parch = async (req, res) => {
+/* export const parch = async (req, res) => {
   const {id_empleado,
         nombre,
         salario,
@@ -107,7 +114,7 @@ export const deleter=(req, res) => {
     console.log("Empleado eliminado:" );
 
     res.send("Empleado eliminado correctamente");
-};
+}; */
 
 
 
