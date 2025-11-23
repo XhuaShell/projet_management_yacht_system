@@ -24,7 +24,7 @@ router.get('/socio/lista', mostrarListaSocio);
 ////update
 router.get('/socio/edicion', mostrarActualizacionSocio);
 //mostrar delete
-router.get('/socio/delete/:cod',mostrarEliminacionSocio);
+router.get('/socio/delete',mostrarEliminacionSocio);
 
 
 //API

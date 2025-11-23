@@ -12,18 +12,20 @@
     <th>Código</th>
     <th>Nombre</th>
     <th>Cédula</th>
+    <td>Direccion</td>
     <th>Fecha Vinculación</th>
     <th>salario</th>
     <th>Teléfono</th>
   </tr>
 
-  <% socios.forEach(s => { %>
+  <% empleados.forEach(s => { %>
     <tr>
       <td><%= s.codigo %></td>
       <td><%= s.nombre %></td>
       <td><%= s.cedula %></td>
       <td><%= s.fecha_vinculacion %></td>
       <td><%= s.direccion %></td>
+      <td><%= s.salario %></td>
       <td><%= s.telefono %></td>
     </tr>
   <% }) %>
