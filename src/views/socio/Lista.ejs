@@ -9,7 +9,7 @@
 
 <table border="1">
   <tr>
-    <th>Código</th>
+    <th>Cedula</th>
     <th>Nombre</th>
     <th>Cédula</th>
     <th>Fecha Vinculación</th>
@@ -19,7 +19,7 @@
 
   <% objetosCons.forEach(s => { %>
     <tr>
-      <td><%= s.codigo %></td>
+      <td><%= s.cedula %></td>
       <td><%= s.nombre %></td>
       <td><%= s.cedula %></td>
       <td><%= s.fecha_vinculacion %></td>
@@ -29,6 +29,11 @@
   <% }) %>
 
 </table>
+<form action="/socio/lista/1" method="GET">
+  <button type="submit">Cargar lista</button>
+</form>
+
+<button> </button>
 
 </body>
 </html>

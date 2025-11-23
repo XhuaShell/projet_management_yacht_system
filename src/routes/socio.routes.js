@@ -10,7 +10,9 @@ const {mostrarFormulario,
 const {
     create,
     parch,
-    deleter}=await import (`../controller/${nombre}.controller.js`);
+    deleter,
+    get
+}=await import (`../controller/${nombre}.controller.js`);
 
 
 
@@ -25,6 +27,7 @@ router.get(`/${nombre}/delete`, mostrarEliminacion);
 router.get(`/${nombre}/main`, mostrarmain);
 
 // API
+router.get(`/${nombre}/lista/1`,get);
 router.post(`/${nombre}/formulario`,create);
 router.patch(`/${nombre}/edicion`, parch);
 router.delete(`/${nombre}/delete`, deleter);

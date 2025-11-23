@@ -13,7 +13,7 @@ export const mostrarFormulario=(req, res) => {
 };
 export const mostrarLista=(req,res) =>{
     //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
-    res.render(`${nombreP}/Lista`)
+    res.render(`${nombreP}/Lista`, { objetosCons: [] }); // inicial vacío
 }
 export const mostrarActualizacion=(req,res)=>{
     res.render(`${nombreP}/FormularioEdicion`)
@@ -44,48 +44,57 @@ export const create=async(req,res) => {
     res.redirect(`/${nombreP}/main`);
 } 
 //consulta get
-export const get=(req,res)=>{
-    const objetosCons=BD.getAll;
-    res.render(`${nombreP}/Lista`,{objetosCons});
+export const get=async(req,res)=>{
+   try {
+    const objetosCons = await BD.getAll(); // array de usuarios
+    console.log(objetosCons);
+    // PASAR OBJETO: la clave objetosCons será la variable en EJS
+    res.render(`${nombreP}/Lista`, { objetosCons }); 
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error al obtener la lista de socios");
+  }
 }
 
 //consulta update
-export const parch=(req, res) => {
-    const {nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
-    const codigo= req.body.cod;
-    // Buscar el socio por código (convertir a número si tu código es número)
-    const indice = socios.findIndex(s => s.codigo == codigo);
+export const parch = async (req, res) => {
+  const { nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
+  const codigo = req.body.cedula; // suponiendo que el código identifica al socio
 
-    if (indice === -1) {
-        return res.send("Socio no encontrado");
+  try {
+    // Buscar al socio por código para validar existencia
+    const socioExistente = await BD.findById(codigo);
+    if (!socioExistente) {
+      return res.status(404).send("Socio no encontrado");
     }
 
-    // Modificar SOLO si el dato fue enviado y no está vacío
-    if (nombre) socios[indice].nombre = nombre;
-    if (cedula) socios[indice].cedula = cedula;
-    if (fecha_vinculacion) socios[indice].fecha_vinculacion = fecha_vinculacion;
-    if (direccion) socios[indice].direccion = direccion;
-    if (telefono) socios[indice].telefono = telefono;
+    // Construir objeto con solo los campos enviados
+    const data = {};
+    if (nombre) data.nombre = nombre; 
+    if (fecha_vinculacion) data.fecha_vinculacion = fecha_vinculacion;
+    if (direccion) data.direccion = direccion;
+    if (telefono) data.telefono = telefono;
 
-    console.log("SOCIO ACTUALIZADO:", socios[indice]);
+    // Actualizar usando BD.put
+    const socioActualizado = await BD.put(codigo, data);
 
-    res.send("Socio actualizado correctamente");
+    res.send({
+      message: "Socio actualizado correctamente",
+      socio: socioActualizado
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`Error al actualizar socio: ${err.message}`);
+  }
 };
 
 //delete de socio
 export const deleter=(req, res) => {
-    const { codigo, nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
+    const { codigo } = req.body;
+    
+    BD.delete(codigo);
 
-    // Buscar el socio por código (convertir a número si tu código es número)
-    const indice = socios.findIndex(s => s.codigo == codigo);
-
-    if (indice === -1) {
-        return res.send("Socio no encontrado");
-    }
-
-    socios.splice(indice,1);
-
-    console.log("SOCIO eliminado:", socios[indice] );
+    console.log("SOCIO eliminado:" );
 
     res.send("Socio eliminado correctamente");
 };
