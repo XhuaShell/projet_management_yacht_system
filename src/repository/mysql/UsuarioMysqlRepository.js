@@ -44,7 +44,7 @@ export class UsuarioMysqlRepository extends RepositoryBase {
             );
         }
 
-        const result = await pool.query(
+        const [result] = await pool.query(
             ` INSERT INTO usuarios 
             ( cedula, nombre, direccion, telefono, fecha_vinculacion, contrasena, mail, tipo_usuario )
              VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);`,
