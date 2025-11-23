@@ -1,39 +1,36 @@
+
+export const nombre="empleado"; 
 import { Router } from "express";
-import { 
-    mostrarFormulario, 
-    mostrarLista,
-    mostrarActualizacion,
-    mostrarEliminacion
-
-} from '../controller/empleado.controller.js';
-
-import { 
+const {mostrarFormulario, 
+    mostrarLista, 
+    mostrarActualizacion, 
+    mostrarEliminacion,
+    mostrarmain
+} = await import(`../controller/${nombre}.controller.js`);
+const {
     create,
     parch,
-    deleter
-} from '../controller/empleado.controller.js';
+    deleter,
+    get
+}=await import (`../controller/${nombre}.controller.js`);
+
+
 
 
 const router =  Router();
-    
+
 // Vista
-// Mostrar el formulario
-router.get('/empleado/formulario', mostrarFormulario);
-// Listar todos los socios
-router.get('/empleado/lista', mostrarLista);
-////update
-router.get('/empleado/edicion', mostrarActualizacion);
-//mostrar delete
-router.get('/empleado/delete',mostrarEliminacion);
+router.get(`/${nombre}/formulario`, mostrarFormulario);
+router.get(`/${nombre}/lista`, mostrarLista);
+router.get(`/${nombre}/edicion`, mostrarActualizacion);
+router.get(`/${nombre}/delete`, mostrarEliminacion);
+router.get(`/${nombre}/main`, mostrarmain);
 
-
-//API
-// Crear un empleado (POST)
-router.post('/empleado/formulario', create);
-//actualizaSocio
-router.patch('/empleado/edicion',parch);
-//delete
-router.delete('/empleado/delete',deleter);
+// API
+router.get(`/${nombre}/lista/1`,get);
+router.post(`/${nombre}/formulario`,create);
+router.patch(`/${nombre}/edicion`, parch);
+router.delete(`/${nombre}/delete`, deleter);
 
 
 

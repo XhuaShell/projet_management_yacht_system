@@ -2,7 +2,7 @@ export class Amarre {
     #num_amarre;
     #id_zona;
     #usuario_propietario_cedula;
-    #fecha_compra;
+    #fecha_compra;  
 
     constructor(amarre = {}) {
         this.num_amarre = amarre.num_amarre ?? null;
