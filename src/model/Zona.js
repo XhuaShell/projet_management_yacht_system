@@ -11,15 +11,6 @@ export class Zona {
     #dim_min_calado;
 
     constructor(zona = {}) {
-        if (
-            typeof zona.id_zona !== "string" ||
-            typeof zona.cuota_administracion !== "number" ||
-            typeof zona.capacidad !== "number" ||
-            typeof zona.profundidad !== "number"
-        ) {
-            throw new Error("Información no ingresada correctamente");
-        }
-
         this.id_zona = zona.id_zona ?? null;
         this.cuota_administracion = zona.cuota_administracion ?? null;
         this.capacidad = zona.capacidad ?? null;
