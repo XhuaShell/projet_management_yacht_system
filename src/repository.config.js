@@ -11,7 +11,7 @@ const repositoryFactory = (type) => {
             return {
                 UsuarioRepository:  new UsuarioMysqlRepository(),
                 ZonaRepository: new ZonaMsqlRepository(),
-                AmarreRepository: new AmarreMysqlRepository(),
+               /* AmarreRepository: new AmarreMysqlRepository(),*/
             } 
         case 'postgres':{}
     }
