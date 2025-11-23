@@ -4,13 +4,13 @@
 Éste proyecto es una implementación hecha para la **Universidad Distrital Francisco José de Caldas University** en la clase de *Programación Avanzada*
 
 ### Enunciado del problema
-    Un club de yates desea tener un sistema de información sobre sus instalaciones, socios, empleados y yates que están vinculados al club. El club está organizado de la siguiente manera: Los socios del club están definidos por la cedula, nombre, dirección teléfono y fecha de vinculación al club. Los yates están definidos por: matricula, nombre, tipo y dimensiones. 
-    
-    Los amarres tienen como datos de interés número de amarre, la lectura del contador de agua y de luz, por otro lado, hay que tener en cuenta que un yate pertenece a un socio, aunque un socio puede tener varios yates. Un yate ocupa un amarre y un amarre solo puede ser ocupado por un yate, es importante la fecha en la que el yate es asignada a un amarre. 
-    
-    Los socios pueden ser propietarios de amarres, siendo importante la fecha de compra del amarre. Hay que tener en cuenta que un amarre pertenece a un solo socio. Se debe tener en cuenta que una cosa es la fecha de compra del amarre y otra cosa es la fecha de ocupación del amarre por un yate. El club está definido en varias zonas, las cuales están definidas por una letra. 
-    
-    Es importante para el club conocer los tipos de yates que tiene, el número de yates que contiene, la profundidad y ancho de los amarres de las zonas. Una zona tiene varios amarres y un amarre pertenece a una solo zona. El club necesita saber cuáles son los yates que un empleado tiene a su cargo. Es importante conocer la lista de yates de un socio junto con la fecha de asignación a un amarre, y en que amarre se encuentra cada yate. Se debe evidenciar los amarres de los cuales un socio es dueño.
+Un club de yates desea tener un sistema de información sobre sus instalaciones, socios, empleados y yates que están vinculados al club. El club está organizado de la siguiente manera: Los socios del club están definidos por la cedula, nombre, dirección teléfono y fecha de vinculación al club. Los yates están definidos por: matricula, nombre, tipo y dimensiones. 
+
+Los amarres tienen como datos de interés número de amarre, la lectura del contador de agua y de luz, por otro lado, hay que tener en cuenta que un yate pertenece a un socio, aunque un socio puede tener varios yates. Un yate ocupa un amarre y un amarre solo puede ser ocupado por un yate, es importante la fecha en la que el yate es asignada a un amarre. 
+
+Los socios pueden ser propietarios de amarres, siendo importante la fecha de compra del amarre. Hay que tener en cuenta que un amarre pertenece a un solo socio. Se debe tener en cuenta que una cosa es la fecha de compra del amarre y otra cosa es la fecha de ocupación del amarre por un yate. El club está definido en varias zonas, las cuales están definidas por una letra. 
+
+Es importante para el club conocer los tipos de yates que tiene, el número de yates que contiene, la profundidad y ancho de los amarres de las zonas. Una zona tiene varios amarres y un amarre pertenece a una solo zona. El club necesita saber cuáles son los yates que un empleado tiene a su cargo. Es importante conocer la lista de yates de un socio junto con la fecha de asignación a un amarre, y en que amarre se encuentra cada yate. Se debe evidenciar los amarres de los cuales un socio es dueño.
 
 ## Solución propuesta
 
@@ -19,15 +19,14 @@ Nosotros proponemos una solución constuida con El lenguaje de programación [Ja
 Para llegar a la solucón seguimos una serie de pasos metodicos:
 
 #### Diseño de la solución
-- Creación del [diagrama de casos de uso](./docs/img/diagrams-case_use.png) 
 - Creación de las [relgas de negocio](./docs/business-rules.md) para la delimitación del problema.
 - Diseño del [diagrama Entidad Relación](./docs/img/relacional.png) como modelo lógico de la base de datos.
 - Diseño del [diagrama relacional]() para la base de datos
 - Estudio de [arquitectura empleada](./docs/img/Arquitectura.png) para la implementación en código.
 
 ### Implementación de la solución
-- Creación del script de creación de la base de datos.
-- Diseño del sistema en el lenguaje JavaScript
+- Creación del [script](./db/DDL.sql) de creación de la base de datos. 
+- [Implementación del sistema](./src/) en el lenguaje JavaScript
 
 ## Ejecutar
 
@@ -45,7 +44,12 @@ git clone https://github.com/XhuaShell/projet-management-yacht-system.git
 Ésta es la configuración por defecto, se deben configurar las variables de la base de datos para que sea posible la conección.
 
 ```txt
-s
+PORT=3000
+DB_HOST=localhost
+DB_PORT=3300
+DB_USER=root
+DB_PASSWORD=123456
+DB_DATABASE=club_yates_db
 ```
 
 ### Correr docker compose para la base de datos **(opcional)**

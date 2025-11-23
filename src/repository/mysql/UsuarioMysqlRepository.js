@@ -1,6 +1,6 @@
 import { RepositoryBase } from "../RepositoryBase.js";
 import { Usuario } from "../../model/Usuario.js";
-import { pool } from "./mysql.config.db.js";
+import { pool } from "../config/mysql.config.db.js";
 
 export class UsuarioMysqlRepository extends RepositoryBase {
     async getAll() {

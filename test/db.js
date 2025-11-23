@@ -2,7 +2,7 @@ import { Usuario } from "../src/model/Usuario.js";
 import { REPOSITORY } from "../src/repository.config.js";
 
 // Elimina los usuarios para la prueva
-import { pool } from "../src/repository/mysql/mysql.config.db.js";
+import { pool } from "../src/repository/config/mysql.config.db.js";
 await pool.query("DELETE FROM usuarios");
 
 /* TIPO DE USUARIO */
