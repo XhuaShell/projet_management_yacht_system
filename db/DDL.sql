@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS club_yates_db;
 USE club_yates_db;
 
-
 CREATE TABLE ZONA (
     id_zona CHAR(1) PRIMARY KEY,
     cuota_administracion NUMERIC(10, 2) NOT NULL,
@@ -111,8 +110,3 @@ CREATE TABLE venta (
     
     CHECK (vendedor_cedula <> comprador_cedula)
 );
-
-CREATE TABLE usar 
-
-
-SHOW DATABASES;

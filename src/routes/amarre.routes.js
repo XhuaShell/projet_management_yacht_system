@@ -1,17 +1,19 @@
 import { Router } from "express";
 
+import { getAmarres, postAmarre, deleteAmarre } from "../controller/amarre.controller.js";
+
 const router =  Router();
 
+//Meddleware
 
+router.use( (req, res, next) => {
+    tokenExist(req.body.token)
+})
+
+// Router
 router.route('/amarre')
-    .get((req, res) => {
-        res.send('GET ejecutado');
-    })
-    .post((req, res) => {
-        res.send('POST ejecutado');
-    })
-    .delete((req, res) => {
-        res.send('DELETE ejecutado');
-    });
+    .get(getAmarres)
+    .post(postAmarre)
+    .delete(deleteAmarre);
 
 export default router;
