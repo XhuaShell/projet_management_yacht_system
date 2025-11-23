@@ -35,8 +35,8 @@ export const getSocio=(req,res)=>{
 
 //consulta update
 export const parchSocio=(req, res) => {
-    const { codigo, nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
-
+    const {nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
+    const codigo= req.body.cod;
     // Buscar el socio por código (convertir a número si tu código es número)
     const indice = socios.findIndex(s => s.codigo == codigo);
 
@@ -69,7 +69,7 @@ export const deleteSocio=(req, res) => {
 
     socios.splice(indice,1);
 
-    console.log("SOCIO eliminado:", socios[indice]);
+    console.log("SOCIO eliminado:", socios[indice] );
 
     res.send("Socio eliminado correctamente");
 };

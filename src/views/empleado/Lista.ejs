@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Empleados</title>
+</head>
+<body>
+
+<h1>Lista de Empleados Registrados</h1>
+
+<table border="1">
+  <tr>
+    <th>Código</th>
+    <th>Nombre</th>
+    <th>Cédula</th>
+    <th>Fecha Vinculación</th>
+    <th>salario</th>
+    <th>Teléfono</th>
+  </tr>
+
+  <% socios.forEach(s => { %>
+    <tr>
+      <td><%= s.codigo %></td>
+      <td><%= s.nombre %></td>
+      <td><%= s.cedula %></td>
+      <td><%= s.fecha_vinculacion %></td>
+      <td><%= s.direccion %></td>
+      <td><%= s.telefono %></td>
+    </tr>
+  <% }) %>
+
+</table>
+
+</body>
+</html>
