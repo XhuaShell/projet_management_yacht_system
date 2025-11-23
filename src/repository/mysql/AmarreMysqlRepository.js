@@ -1,130 +1,189 @@
 import { RepositoryBase } from "../RepositoryBase.js";
 import { Amarre } from "../../model/Amarre.js";
 import { pool } from "../config/mysql.config.db.js";
-
-// constructor(amarre = {}) {
-
-//     // Validaciones iniciales similares al estilo del Usuario
-//     if (
-//         typeof amarre.num_amarre !== "number" ||
-//         typeof amarre.id_zona !== "string"
-//     ) {
-//         throw new Error("Información no ingresada correctamente");
-//     }
-
-//     this.num_amarre = amarre.num_amarre ?? null;
-//     this.id_zona = amarre.id_zona ?? null;
-//     this.usuario_propietario_cedula = amarre.usuario_propietario_cedula ?? null;
-//     this.fecha_compra = amarre.fecha_compra ?? null;
-// }
-
+import { REPOSITORY } from "../../repository.config.js";
+import { date, int, str } from "../Validaciones.js";
 
 export class AmarreMysqlRepository extends RepositoryBase {
-
-        async getAll() {
-        const [rows] = await pool.query("SELECT * FROM usuarios");
-        return rows.map((row) => new Usuario(row));
+    async getAll() {
+        const [rows] = await pool.query("SELECT * FROM amarres");
+        return rows.map(
+            (row) =>
+                new Amarre({
+                    num_amarre: int(row.num_amarre),
+                    id_zona: str(row.id_zona),
+                    usuario_propietario_cedula: str(
+                        row.usuario_propietario_cedula
+                    ),
+                    fecha_compra:
+                        date(row.fecha_compra) != null
+                            ? row.fecha_compra
+                            : null,
+                })
+        );
     }
 
-    async findById(cedula) {
+    async findByNum(num_amarre) {
         const [rows] = await pool.query(
-            "SELECT * FROM usuarios WHERE cedula = ?",
+            "SELECT * FROM amarres WHERE num_amarre = ?",
+            [num_amarre]
+        );
+        return rows.length > 0 ? new Amarre(rows[0]) : null;
+    }
+
+    async getAllByPropietario(cedula) {
+        const [rows] = await pool.query(
+            "SELECT * FROM amarres WHERE usuario_propietario_cedula = ?",
             [cedula]
         );
-        return rows.length > 0 ? new Usuario(rows[0]) : null;
+        return rows.map(
+            (row) =>
+                new Amarre({
+                    num_amarre: int(row.num_amarre),
+                    id_zona: str(row.id_zona),
+                    usuario_propietario_cedula: str(
+                        row.usuario_propietario_cedula
+                        // Transexual.
+                    ),
+                    fecha_compra:
+                        date(row.fecha_compra) != null
+                            ? row.fecha_compra
+                            : null,
+                })
+        );
     }
 
-    async findByMail(mail) {
+    async getAllByZona(id_zona) {
         const [rows] = await pool.query(
-            "SELECT * FROM usuarios WHERE mail = ?",
-            [mail]
+            "SELECT * FROM amarres WHERE id_zona = ?",
+            [id_zona]
         );
-        return rows.length > 0 ? new Usuario(rows[0]) : null;
+        return rows.map(
+            (row) =>
+                new Amarre({
+                    num_amarre: int(row.num_amarre),
+                    id_zona: str(row.id_zona),
+                    usuario_propietario_cedula: str(
+                        row.usuario_propietario_cedula
+                        // Transexual.
+                    ),
+                    fecha_compra:
+                        date(row.fecha_compra) != null
+                            ? row.fecha_compra
+                            : null,
+                })
+        );
     }
 
-    async save(usuario) {
-        if (await this.findById(usuario.cedula)) {
-            throw new Error(
-                "ERROR: La cédula que intentaste usar ya está registrada."
-            );
-        }
-
-        if (await this.findByMail(usuario.mail)) {
-            throw new Error(
-                "ERROR: El mail que intentaste usar ya está registrado."
-            );
-        }
-
-        const tipo = usuario.tipo_usuario;
-        if (tipo !== "ADMIN" && tipo !== "SOCIO") {
-            throw new Error(
-                "ERROR: El tipo de usuario no es válido. Debe ser 'ADMIN' o 'SOCIO'."
-            );
-        }
-
-        const result = await pool.query(
-            ` INSERT INTO usuarios 
-            ( cedula, nombre, direccion, telefono, fecha_vinculacion, contrasena, mail, tipo_usuario )
-             VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);`,
-            [
-                usuario.cedula,
-                usuario.nombre,
-                usuario.direccion,
-                usuario.telefono,
-                usuario.fecha_vinculacion,
-                usuario.contrasena,
-                usuario.mail,
-                usuario.tipo_usuario,
-            ]
+    async getAllByPropietario(cedula) {
+        const [rows] = await pool.query(
+            "SELECT * FROM amarres WHERE usuario_propietario_cedula = ?",
+            [cedula]
         );
-        if (result.affectedRows > 0) {
-            return new Usuario(usuario); // usar lo que tú ya tienes
-        }
-
-        return null;
+        return rows.map(
+            (row) =>
+                new Amarre({
+                    num_amarre: int(row.num_amarre),
+                    id_zona: str(row.id_zona),
+                    usuario_propietario_cedula: str(
+                        row.usuario_propietario_cedula
+                        // Transexual.
+                    ),
+                    fecha_compra: date(row.fecha_compra),
+                })
+        );
     }
 
-    async put(cedula, data) {
-        if (data.cedula || data.mail) {
-            throw new Error(
-                `No puedes actualizar el dato:${data.cedula ? "cedula" : ""} ${
-                    data.mail ? "mail" : ""
-                } `
-            );
+    async save(amarre) {
+        // num_amarre único
+        if (await this.findByNum(amarre.num_amarre)) {
+            throw new Error("ERROR: El número de amarre ya existe.");
         }
 
-        const campos = Object.keys(data);
-        const valores = Object.values(data);
+        // zona existente
+        const zona = await REPOSITORY.ZonaRepository.findById(amarre.id_zona);
+        if (!zona) throw new Error("ERROR: La zona no existe.");
 
-        if (campos.length === 0) return null;
+        // usuario propietario si viene
+        if (amarre.usuario_propietario_cedula) {
+            const usr = await REPOSITORY.UsuarioRepository.findById(
+                amarre.usuario_propietario_cedula
+            );
+            if (!usr)
+                throw new Error("ERROR: El usuario propietario no existe.");
+        }
 
-        // UPDATE usuarios SET campo1=?, campo2=?, ... WHERE cedula=?
-        const setQuery = campos.map((campo) => `${campo} = ?`).join(", ");
+        // fecha válida si viene
+        if (amarre.fecha_compra && date(amarre.fecha_compra) === null) {
+            throw new Error("ERROR: Formato de fecha inválido.");
+        }
 
-        const [result] = await pool.query(
-            `UPDATE usuarios SET ${setQuery} WHERE cedula = ?`,
-            [...valores, cedula]
-        );
+        const num_amarre = amarre.num_amarre;
+        const id_zona = amarre.id_zona;
+        const usuario = amarre.usuario_propietario_cedula ?? null;
+        const fecha = amarre.fecha_compra ?? null;
 
-        return result.affectedRows > 0 ? this.findById(cedula) : null;
+        const sql = `
+        INSERT INTO amarres (
+            num_amarre,
+            id_zona,
+            usuario_propietario_cedula,
+            fecha_compra
+        ) VALUES (?, ?, ?, ?);
+    `;
+
+        const [result] = await pool.query(sql, [
+            num_amarre,
+            id_zona,
+            usuario,
+            fecha,
+        ]);
+
+        return result.affectedRows > 0
+            ? await this.findByNum(num_amarre) // -> Devuelve un amarre si se logró hacer la insercion ñam ñam
+            : null; // -> se va al carajo aquí
     }
 
     /**
-     * Elimina un usuario de la base de datos;
-     *  
-     * @param {*} cedula 
-     * @returns false si no se encontró la cedula 
-     * @returns true si se eliminó correctamente
-     
+     * Solo se puede actualizar el propietario y la fecha de compra.
+     * @param {*} amarre
      */
-    async delete(cedula) {
-        const [result] = await pool.query(
-            "DELETE FROM usuarios WHERE cedula = ?",
-            [cedula]
-        );
+    async put(amarre) {
+        // usuario propietario si viene
+        if (amarre.usuario_propietario_cedula) {
+            const usr = await REPOSITORY.UsuarioRepository.findById(
+                amarre.usuario_propietario_cedula
+            );
+            if (!usr)
+                throw new Error("ERROR: El usuario propietario no existe.");
+        }
 
+        // fecha válida si viene
+        if (amarre.fecha_compra && date(amarre.fecha_compra) === null) {
+            throw new Error("ERROR: Formato de fecha inválido.");
+        }
+
+        const sql = `
+        UPDATE amarres
+        SET 
+            usuario_propietario_cedula = ?, 
+            fecha_compra = ?
+        WHERE num_amarre = ?
+    `;
+
+        const params = [
+            str(amarre.usuario_propietario_cedula),
+            amarre.fecha_compra ? date(amarre.fecha_compra) : null,
+            int(amarre.num_amarre),
+        ];
+
+        const [result] = await pool.query(sql, params);
         return result.affectedRows > 0;
     }
 
+    async deleteByNum(num) {
+        const sql = "DELETE FROM amarres WHERE num_amarre = ?";
+        const [result] = await pool.query(sql, [int(num)]);
+        return result.affectedRows > 0;
+    }
 }
-

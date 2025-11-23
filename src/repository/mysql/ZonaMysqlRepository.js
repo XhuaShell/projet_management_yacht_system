@@ -4,30 +4,6 @@ import { pool } from "../config/mysql.config.db.js";
 
 import { int, float, str } from "../Validaciones.js";
 
-/*
-constructor(zona = {}) {
-    if (
-        typeof zona.id_zona !== "string" ||
-        typeof zona.cuota_administracion !== "number" ||
-        typeof zona.capacidad !== "number" ||
-        typeof zona.profundidad !== "number"
-    ) {
-        throw new Error("Información no ingresada correctamente");
-    }
-
-    this.id_zona = zona.id_zona ?? null;
-    this.cuota_administracion = zona.cuota_administracion ?? null;
-    this.capacidad = zona.capacidad ?? null;
-    this.profundidad = zona.profundidad ?? null;
-    this.dim_max_eslora = zona.dim_max_eslora ?? null;
-    this.dim_max_manga = zona.dim_max_manga ?? null;
-    this.dim_max_calado = zona.dim_max_calado ?? null;
-    this.dim_min_eslora = zona.dim_min_eslora ?? null;
-    this.dim_min_manga = zona.dim_min_manga ?? null;
-    this.dim_min_calado = zona.dim_min_calado ?? null;
-}
-*/
-
 export class ZonaMsqlRepository extends RepositoryBase {
     async getAll() {
         const [rows] = await pool.query("SELECT * FROM zonas");

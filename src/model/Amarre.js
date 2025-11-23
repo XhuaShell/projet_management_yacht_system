@@ -5,15 +5,6 @@ export class Amarre {
     #fecha_compra;
 
     constructor(amarre = {}) {
-
-        // Validaciones iniciales similares al estilo del Usuario
-        if (
-            typeof amarre.num_amarre !== "number" ||
-            typeof amarre.id_zona !== "string"
-        ) {
-            throw new Error("Información no ingresada correctamente");
-        }
-
         this.num_amarre = amarre.num_amarre ?? null;
         this.id_zona = amarre.id_zona ?? null;
         this.usuario_propietario_cedula = amarre.usuario_propietario_cedula ?? null;
