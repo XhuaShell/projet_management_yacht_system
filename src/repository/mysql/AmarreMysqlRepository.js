@@ -5,23 +5,24 @@ import { REPOSITORY } from "../../repository.config.js";
 import { date, int, str } from "../Validaciones.js";
 
 export class AmarreMysqlRepository extends RepositoryBase {
+    //corregido con chatgpt
     async getAll() {
-        const [rows] = await pool.query("SELECT * FROM amarres");
-        return rows.map(
-            (row) =>
-                new Amarre({
-                    num_amarre: int(row.num_amarre),
-                    id_zona: str(row.id_zona),
-                    usuario_propietario_cedula: str(
-                        row.usuario_propietario_cedula
-                    ),
-                    fecha_compra:
-                        date(row.fecha_compra) != null
-                            ? row.fecha_compra
-                            : null,
-                })
-        );
-    }
+    const [rows] = await pool.query("SELECT * FROM amarres");
+
+    return rows.map(
+        (row) =>
+            new Amarre({
+                num_amarre: Number(row.num_amarre),        // convertir a número
+                id_zona: String(row.id_zona),              // convertir a string
+                usuario_propietario_cedula: row.usuario_propietario_cedula
+                    ? String(row.usuario_propietario_cedula)
+                    : null,                                 // si es null en DB
+                fecha_compra: row.fecha_compra
+                    ? new Date(row.fecha_compra)            // convertir a Date
+                    : null,
+            })
+    );
+}
 
     async findByNum(num_amarre) {
         const [rows] = await pool.query(
