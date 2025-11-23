@@ -1,39 +1,33 @@
+
+export const nombre="socio"; 
 import { Router } from "express";
-import { 
-    mostrarFormularioSocio, 
-    mostrarListaSocio,
-    mostrarActualizacionSocio,
-    mostrarEliminacionSocio
+const {mostrarFormulario, 
+    mostrarLista, 
+    mostrarActualizacion, 
+    mostrarEliminacion,
+    mostrarmain
+} = await import(`../controller/${nombre}.controller.js`);
+const {
+    create,
+    parch,
+    deleter}=await import (`../controller/${nombre}.controller.js`);
 
-} from '../controller/socio.controller.js';
 
-import { 
-    createSocio,
-    parchSocio,
-    deleteSocio
-} from '../controller/socio.controller.js';
 
 
 const router =  Router();
 
 // Vista
-// Mostrar el formulario
-router.get('/socio/formulario', mostrarFormularioSocio);
-// Listar todos los socios
-router.get('/socio/lista', mostrarListaSocio);
-////update
-router.get('/socio/edicion', mostrarActualizacionSocio);
-//mostrar delete
-router.get('/socio/delete',mostrarEliminacionSocio);
+router.get(`/${nombre}/formulario`, mostrarFormulario);
+router.get(`/${nombre}/lista`, mostrarLista);
+router.get(`/${nombre}/edicion`, mostrarActualizacion);
+router.get(`/${nombre}/delete`, mostrarEliminacion);
+router.get(`/${nombre}/main`, mostrarmain);
 
-
-//API
-// Crear un socio (POST)
-router.post('/socio/formulario', createSocio);
-//actualizaSocio
-router.patch('/socio/edicion',parchSocio);
-//delete
-router.delete('/socio/delete',deleteSocio);
+// API
+router.post(`/${nombre}/formulario`,create);
+router.patch(`/${nombre}/edicion`, parch);
+router.delete(`/${nombre}/delete`, deleter);
 
 
 

@@ -1,30 +1,34 @@
-import {socios} from '../repository/pruebaArray.js';
-import {Socio} from '../model/socio.js'
+
 import {UsuarioMysqlRepository} from '../repository/mysql/UsuarioMysqlRepository.js'
-import { render } from 'ejs';
+
 import { Usuario } from '../model/Usuario.js';
+const nombreP="socio"; 
 const BD = new UsuarioMysqlRepository();
 
 
 //req a server 
-export const mostrarFormularioSocio=(req, res) => {
-    res.render('socio/Formulario',)
+export const mostrarFormulario=(req, res) => {
+    res.render(`${nombreP}/Formulario`);
+    
 };
-export const mostrarListaSocio=(req,res) =>{
+export const mostrarLista=(req,res) =>{
     //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
-    res.render('socio/ListadeSocios',{socios})
+    res.render(`${nombreP}/Lista`)
 }
-export const mostrarActualizacionSocio=(req,res)=>{
-    res.render('socio/FormularioEdicion')
+export const mostrarActualizacion=(req,res)=>{
+    res.render(`${nombreP}/FormularioEdicion`)
 }
-export const mostrarEliminacionSocio=(req,res)=>{
-    res.render('socio/Deleter')
+export const mostrarEliminacion=(req,res)=>{
+    res.render(`${nombreP}/Deleter`)
+}
+export const mostrarmain=(req,res)=>{
+    res.render(`${nombreP}/main`)
 }
 
 
 
 //req a BD
-export const createSocio=async(req,res) => {
+export const create=async(req,res) => {
     const {codigo,nombre,cedula,fecha_vinculacion,direccion,telefono,contraseña,email}=req.body;
     const nuevo_Usuario = new Usuario({
         cedula: String(cedula),
@@ -34,17 +38,19 @@ export const createSocio=async(req,res) => {
         fecha_vinculacion,
         contrasena: String(contraseña),
         mail: email,   // porque tu constructor lo exige
-        tipo_usuario: "sOCIO" // si quieres
+        tipo_usuario: "SOCIO" // si quieres
     });
     BD.save(nuevo_Usuario);
+    res.redirect(`/${nombreP}/main`);
 } 
 //consulta get
-export const getSocio=(req,res)=>{
-
+export const get=(req,res)=>{
+    const objetosCons=BD.getAll;
+    res.render(`${nombreP}/Lista`,{objetosCons});
 }
 
 //consulta update
-export const parchSocio=(req, res) => {
+export const parch=(req, res) => {
     const {nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
     const codigo= req.body.cod;
     // Buscar el socio por código (convertir a número si tu código es número)
@@ -67,7 +73,7 @@ export const parchSocio=(req, res) => {
 };
 
 //delete de socio
-export const deleteSocio=(req, res) => {
+export const deleter=(req, res) => {
     const { codigo, nombre, cedula, fecha_vinculacion, direccion, telefono } = req.body;
 
     // Buscar el socio por código (convertir a número si tu código es número)
