@@ -4,12 +4,6 @@ export class TipoYate {
     #descripcion;
 
     constructor(tipo = {}) {
-        if (
-            typeof tipo.nombre !== "string"
-        ) {
-            throw new Error("Información no ingresada correctamente");
-        }
-
         this.id_tipo = tipo.id_tipo ?? null;
         this.nombre = tipo.nombre ?? null;
         this.descripcion = tipo.descripcion ?? null;
