@@ -62,11 +62,11 @@ try {
 console.log("\n=== PROBANDO CONSULTAS ===\n");
 
 let tipoVela = await REPOSITORY.TipoYateRepository.findByNombre("Yate a Vela");
-console.log("🔎 Encontrado por Nombre ('Yate a Vela'):", tipoVela);
+console.log("🔎 Encontrado por Nombre ('Yate a Vela'):", tipoVela.toJSON());
 
-const idCatamaran = 2; // Asumiendo que el ID del Catamarán es 2
+const idCatamaran = 25; // Asumiendo que el ID del Catamarán es 2
 let tipoCatamaran = await REPOSITORY.TipoYateRepository.findById(idCatamaran);
-console.log(`🔎 Encontrado por ID (${idCatamaran}):`, tipoCatamaran);
+console.log(`🔎 Encontrado por ID (${idCatamaran}):`, tipoCatamaran.toJSON());
 
 // ===============================
 //     PROBAR ACTUALIZACIÓN (put)

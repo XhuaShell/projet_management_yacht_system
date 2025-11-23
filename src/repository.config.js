@@ -12,12 +12,8 @@ const repositoryFactory = (type) => {
             return {
                 UsuarioRepository:  new UsuarioMysqlRepository(),
                 ZonaRepository: new ZonaMsqlRepository(),
-<<<<<<< HEAD
                 AmarreRepository: new AmarreMysqlRepository(),
                 TipoYateRepository: new TipoYateMysqlRepository()
-=======
-               /* AmarreRepository: new AmarreMysqlRepository(),*/
->>>>>>> 0d9864db21762bdcbdb0e430fb4cc378256ed5a3
             } 
         case 'postgres':{}
     }

@@ -18,6 +18,7 @@ export class TipoYateMysqlRepository extends RepositoryBase {
     }
 
     async findById(id) {
+        console.log(int(id))
         const [rows] = await pool.query(
             "SELECT * FROM tipo_yate WHERE id_tipo = ?",
             [int(id)]
@@ -28,7 +29,7 @@ export class TipoYateMysqlRepository extends RepositoryBase {
     async findByNombre(nombre) {
         const [rows] = await pool.query(
             "SELECT * FROM tipo_yate WHERE nombre = ?",
-            [str(nombre)]
+            [nombre]
         );
         return rows.length > 0 ? new TipoYate(rows[0]) : null;
     }
