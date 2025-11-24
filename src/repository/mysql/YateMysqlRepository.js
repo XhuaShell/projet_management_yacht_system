@@ -130,12 +130,12 @@ export class YateMysqlRepository extends RepositoryBase {
         `;
 
         const params = [
-            str(yate.matricula),
-            str(yate.nombre),
+            String(yate.matricula),
+            String(yate.nombre),
             yate.eslora ?? null,
             yate.manga ?? null,
             yate.calado ?? null,
-            str(yate.usuario_dueno_cedula),
+            String(yate.usuario_dueno_cedula),
             yate.id_tipo ?? null,
             yate.empleado_cargo ?? null,
         ];
