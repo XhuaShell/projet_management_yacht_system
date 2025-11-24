@@ -76,7 +76,6 @@ export const get = async (req, res) => {
   }
 }
 
-
 //consulta update
 export const patch = async (req, res) => {
   const {

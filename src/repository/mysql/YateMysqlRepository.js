@@ -1,27 +1,38 @@
 import { RepositoryBase } from "../RepositoryBase.js";
 import { Yate } from "../../model/Yate.js";
-import { pool } from "../config/mysql.config.db.js";
-import { REPOSITORY } from "../../repository.config.js";
 import { str, int, float } from "../Validaciones.js";
-import {EmpleadoMysqlRepository} from './EmpleadoMysqlRepository.js';
+
+import { pool } from "../config/mysql.config.db.js";
+import { EmpleadoMysqlRepository } from "./EmpleadoMysqlRepository.js";
+import { UsuarioMysqlRepository } from "./UsuarioMysqlRepository.js";
+import { TipoYateMysqlRepository } from "./TipoYateMysqlRepository.js";
 
 const dber = {
-  EmpleadoMysqlRepository
+    EmpleadoMysqlRepository,
 };
 
 export class YateMysqlRepository extends RepositoryBase {
+    constructor() {
+        super();
+
+        this.REPOSITORY = {
+            TipoYateRepository: new TipoYateMysqlRepository(),
+            UsuarioRepository: new UsuarioMysqlRepository(),
+        };
+    }
+
     async getAll() {
         const [rows] = await pool.query("SELECT * FROM yates");
 
         return rows.map(
             (row) =>
                 new Yate({
-                    matricula: str(row.matricula),
-                    nombre: str(row.nombre),
+                    matricula: String(row.matricula),
+                    nombre: String(row.nombre),
                     eslora: row.eslora !== null ? float(row.eslora) : null,
                     manga: row.manga !== null ? float(row.manga) : null,
                     calado: row.calado !== null ? float(row.calado) : null,
-                    usuario_dueno_cedula: str(row.usuario_dueno_cedula),
+                    usuario_dueno_cedula: String(row.usuario_dueno_cedula),
                     id_tipo: row.id_tipo !== null ? int(row.id_tipo) : null,
                     empleado_cargo:
                         row.empleado_cargo !== null
@@ -56,12 +67,12 @@ export class YateMysqlRepository extends RepositoryBase {
         return rows.map(
             (row) =>
                 new Yate({
-                    matricula: str(row.matricula),
-                    nombre: str(row.nombre),
+                    matricula: String(row.matricula),
+                    nombre: String(row.nombre),
                     eslora: row.eslora !== null ? float(row.eslora) : null,
                     manga: row.manga !== null ? float(row.manga) : null,
                     calado: row.calado !== null ? float(row.calado) : null,
-                    usuario_dueno_cedula: str(row.usuario_dueno_cedula),
+                    usuario_dueno_cedula: String(row.usuario_dueno_cedula),
                     id_tipo: row.id_tipo !== null ? int(row.id_tipo) : null,
                     empleado_cargo:
                         row.empleado_cargo !== null
@@ -83,14 +94,14 @@ export class YateMysqlRepository extends RepositoryBase {
         }
 
         // dueño existente
-        const dueno = await REPOSITORY.UsuarioRepository.findById(
+        const dueno = await this.REPOSITORY.UsuarioRepository.findById(
             yate.usuario_dueno_cedula
         );
         if (!dueno) throw new Error("ERROR: El usuario dueño no existe.");
 
         // tipo existente
         if (yate.id_tipo) {
-            const tipo = await REPOSITORY.TipoYateRepository.findById(
+            const tipo = await this.REPOSITORY.TipoYateRepository.findById(
                 yate.id_tipo
             );
             if (!tipo)
@@ -102,8 +113,7 @@ export class YateMysqlRepository extends RepositoryBase {
             const emp = await dber.EmpleadoRepository.findById(
                 yate.empleado_cargo
             );
-            if (!emp)
-                throw new Error("ERROR: El empleado asignado no existe.");
+            if (!emp) throw new Error("ERROR: El empleado asignado no existe.");
         }
 
         const sql = `
@@ -146,36 +156,31 @@ export class YateMysqlRepository extends RepositoryBase {
         if (yate.nombre && yate.nombre !== existente.nombre) {
             const repetido = await this.findByNombre(yate.nombre);
             if (repetido)
-                throw new Error(
-                    "ERROR: Ya existe otro yate con ese nombre."
-                );
+                throw new Error("ERROR: Ya existe otro yate con ese nombre.");
         }
 
         // dueño existente
         if (yate.usuario_dueno_cedula) {
-            const dueno = await REPOSITORY.UsuarioRepository.findById(
+            const dueno = await this.REPOSITORY.UsuarioRepository.findById(
                 yate.usuario_dueno_cedula
             );
-            if (!dueno)
-                throw new Error("ERROR: El usuario dueño no existe.");
+            if (!dueno) throw new Error("ERROR: El usuario dueño no existe.");
         }
 
         // tipo existente
         if (yate.id_tipo) {
-            const tipo = await REPOSITORY.TipoYateRepository.findById(
+            const tipo = await this.REPOSITORY.TipoYateRepository.findById(
                 yate.id_tipo
             );
-            if (!tipo)
-                throw new Error("ERROR: El tipo de yate no existe.");
+            if (!tipo) throw new Error("ERROR: El tipo de yate no existe.");
         }
 
         // empleado
         if (yate.empleado_cargo) {
-            const emp = await REPOSITORY.EmpleadoRepository.findById(
+            const emp = await this.REPOSITORY.EmpleadoRepository.findById(
                 yate.empleado_cargo
             );
-            if (!emp)
-                throw new Error("ERROR: El empleado asignado no existe.");
+            if (!emp) throw new Error("ERROR: El empleado asignado no existe.");
         }
 
         const sql = `

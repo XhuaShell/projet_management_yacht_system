@@ -1,11 +1,17 @@
-
-
 import { Yate } from "../src/model/Yate.js";
 import { Usuario } from "../src/model/Usuario.js";
 import { TipoYate } from "../src/model/TipoYate.js";
 
-import { REPOSITORY } from "../src/repository.config.js";
 import { pool } from "../src/repository/config/mysql.config.db.js";
+import { UsuarioMysqlRepository } from "../src/repository/mysql/UsuarioMysqlRepository.js";
+import { TipoYateMysqlRepository } from "../src/repository/mysql/TipoYateMysqlRepository.js";
+import { YateMysqlRepository } from "../src/repository/mysql/YateMysqlRepository.js";
+
+const REPOSITORY = {
+    UsuarioRepository: new UsuarioMysqlRepository(),
+    TipoYateRepository: new TipoYateMysqlRepository(),
+    YateRepository: new YateMysqlRepository()
+};
 
 // ===============================
 //   LIMPIEZA DE LA BD (para nacer de nuevo como la tusa)
@@ -84,6 +90,7 @@ try {
     console.error("❌ Error inesperado al insertar yate 1:", e.message);
 }
 
+/** 
 // ERROR ESPERADO: matrícula duplicada
 try {
     await REPOSITORY.YateRepository.save(
@@ -205,3 +212,5 @@ yates = await REPOSITORY.YateRepository.getAll();
 yates.forEach((y) => console.log(y.toJSON()));
 
 console.log("\n🏁 TEST COMPLETO FINALIZADO.\n");
+
+*/
