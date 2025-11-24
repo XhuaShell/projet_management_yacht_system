@@ -107,4 +107,16 @@ export class UsuarioMysqlRepository extends RepositoryBase {
 
         return result.affectedRows > 0;
     }
+
+    async validarUsuarioContrasena(mail, contrasena) {
+        const usuario = await this.findByMail(mail);
+        if (!usuario) {
+            throw new Error("El mail no se encontró en la base de datos.");
+        }
+
+        if ( usuario.contrasena !== contrasena) {
+            throw new Error("La contraseña no coincide con el mail.");
+        }
+        return usuario;
+    }
 }

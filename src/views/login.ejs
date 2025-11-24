@@ -1,0 +1,107 @@
+<%- include('partials/header'); %> 
+
+<!-- LOGIN - estilo Jam Don Salmon (Bootstrap) -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <h3 class="fw-bold mb-0">𝓙𝓪𝓶 𝓓𝓸𝓷 𝓢𝓪𝓵𝓶𝓸𝓷</h3>
+            <p class="text-muted small">Accede a tu cuenta y navega tranquilo</p>
+          </div>
+
+          <!-- Formulario -->
+          <form id="loginForm" action="/autenticar/login" method="POST" novalidate>
+            <!-- Username / Email -->
+            <div class="mb-3">
+              <label for="inputUser" class="form-label">Correo</label>
+              <input
+                type="email"
+                class="form-control"
+                id="inputUser"
+                name="mail"
+                placeholder="ej: pepe@donsalmon.com"
+                required
+                aria-describedby="userHelp"
+              />
+              <div class="invalid-feedback">Por favor ingresa tu correo o usuario.</div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="inputPassword" class="form-label">Contraseña</label>
+              <div class="input-group">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="inputPassword"
+                  name="contrasena"
+                  placeholder="••••••••"
+                  required
+                  minlength="3"
+                  aria-describedby="togglePassword"
+                />
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword" aria-label="Mostrar contraseña">
+                  Mostrar
+                </button>
+                <div class="invalid-feedback">La contraseña debe tener al menos 3 caracteres.</div>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid mb-3">
+              <button type="submit" class="btn btn-primary btn-lg fw-semibold">Entrar</button>
+            </div>
+
+            <!-- Small footer -->
+            <p class="text-center text-muted small mt-3 mb-0">
+              ¿No tienes cuenta? <a href="/auth/register">Regístrate</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- Optional card footer image / branding -->
+        <div class="card-footer bg-white text-center py-3">
+          <small class="text-muted">Protegido · 𝓙𝓪𝓶 𝓓𝓸𝓷 𝓢𝓪𝓵𝓶𝓸𝓷 A.C.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS (validación y toggle password) -->
+<script>
+  // Toggle show/hide password
+  const toggleBtn = document.getElementById("togglePassword");
+  const pwdInput = document.getElementById("inputPassword");
+  toggleBtn?.addEventListener("click", () => {
+    const type = pwdInput.type === "password" ? "text" : "password";
+    pwdInput.type = type;
+    toggleBtn.textContent = type === "password" ? "Mostrar" : "Ocultar";
+  });
+
+  // Client-side bootstrap validation
+  (function () {
+    'use strict'
+    const form = document.getElementById('loginForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function (event) {
+      // built-in HTML validity
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      // custom: trim user
+      const user = document.getElementById('inputUser');
+      if (user) user.value = user.value.trim();
+
+      form.classList.add('was-validated');
+    }, false)
+  })();
+</script>
+
+<%- include('partials/footer') %>
+

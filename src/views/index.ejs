@@ -1,4 +1,4 @@
-<%- include('partials/header'); %> <%- include('partials/navbar') %> <%-
+<%- include('partials/header'); %> <%- include('partials/navbar_index') %> <%-
 include('partials/carrusel') %>
 
 <div class="container py-5">
@@ -124,6 +124,7 @@ include('partials/carrusel') %>
             </div>
         </div>
     </section>
+
     <!-- Ubicación -->
     <section id="ubicacion" class="mb-5">
         <h2 class="fw-semibold mb-3">Ubicación</h2>
@@ -167,6 +168,18 @@ include('partials/carrusel') %>
                     class="img-fluid rounded shadow"
                     alt="Ubicación en Cartagena"
                 />
+            </div>
+
+            <div class="map-responsive">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.249771572082!2d-75.55229612586859!3d10.411389266237939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef62f9e54a2dbb7%3A0xf1f738677d0e3c9a!2sCra.%201%20%238-12%2C%20Bocagrande%2C%20Cartagena%2C%20Bol%C3%ADvar%2C%20Colombia!5e0!3m2!1ses-419!2sco!4v1732400000000!5m2!1ses-419!2sco"
+                    width="100%"
+                    height="350"
+                    style="border: 0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
             </div>
         </div>
     </section>
