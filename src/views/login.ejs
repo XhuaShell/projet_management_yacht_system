@@ -17,10 +17,10 @@
             <div class="mb-3">
               <label for="inputUser" class="form-label">Correo</label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
                 id="inputUser"
-                name="user"
+                name="mail"
                 placeholder="ej: pepe@donsalmon.com"
                 required
                 aria-describedby="userHelp"
@@ -36,16 +36,16 @@
                   type="password"
                   class="form-control"
                   id="inputPassword"
-                  name="password"
+                  name="contrasena"
                   placeholder="••••••••"
                   required
-                  minlength="6"
+                  minlength="3"
                   aria-describedby="togglePassword"
                 />
                 <button class="btn btn-outline-secondary" type="button" id="togglePassword" aria-label="Mostrar contraseña">
                   Mostrar
                 </button>
-                <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+                <div class="invalid-feedback">La contraseña debe tener al menos 3 caracteres.</div>
               </div>
             </div>
 

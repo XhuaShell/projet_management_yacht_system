@@ -1,8 +1,29 @@
+import { UsuarioMysqlRepository } from "../repository/mysql/UsuarioMysqlRepository.js";
+import { Usuario } from "../model/Usuario.js";
 
+const nombreP = "empleado";
+const BD = new UsuarioMysqlRepository();
 
-export const autenticarUsuario = async (req, res) => {
-    const result = await pool.query("SELECT 1 + 1 AS result");
-    REPOSITORY.socioRepository.getAll()
-    res.json(result[0])
-}
+export const autenticarUsuario = async function (req, res) {
+    const { mail, contrasena } = req.body;
 
+    try {
+        if (!mail || !contrasena)
+            throw new Error("El mail y la contraseña son obligatorios");
+
+        const user = await BD.validarUsuarioContrasena(mail, contrasena);
+
+        //console.log(user.toJSON());
+
+        if (user.tipo_usuario === 'SOCIO') {
+            return res.render("panelSocio");
+        } else {
+            return res.render("panelAdmin");
+        }
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(400).json({ mensaje: error.message });
+    }
+};
