@@ -1,7 +1,6 @@
 import { UsuarioMysqlRepository } from "../repository/mysql/UsuarioMysqlRepository.js";
 import { Usuario } from "../model/Usuario.js";
 
-const nombreP = "empleado";
 const BD = new UsuarioMysqlRepository();
 
 export const autenticarUsuario = async function (req, res) {
@@ -13,17 +12,133 @@ export const autenticarUsuario = async function (req, res) {
 
         const user = await BD.validarUsuarioContrasena(mail, contrasena);
 
-        //console.log(user.toJSON());
+        req.session.usuario = user.toJSON();
 
-        if (user.tipo_usuario === 'SOCIO') {
-            return res.render("panelSocio");
+        if (user.tipo_usuario === "SOCIO") {
+            req.session.panelInfo = {
+                titulo: "Panel Socio",
+                secciones: [
+                    {
+                        titulo: "Amarres",
+                        botones: [
+                            {
+                                nombre: "Zonas",
+                                link: "/zona/formulario",
+                            },
+                            {
+                                nombre: "Estadísticas",
+                                link: "",
+                            },
+                        ],
+                    },
+                    {
+                        titulo: "Gestion",
+                        botones: [
+                            {
+                                nombre: "Usuarios",
+                                link: "",
+                            },
+                            {
+                                nombre: "Reportes",
+                                link: "",
+                            },
+                            {
+                                nombre: "Registros",
+                                link: "",
+                            },
+                        ],
+                    },
+                    {
+                        titulo: "Configuracion",
+                        botones: [
+                            {
+                                nombre: "Preferencias",
+                                link: "",
+                            },
+                            {
+                                nombre: "Pene",
+                                link: "",
+                            },
+                        ],
+                    },
+                ],
+            };
+            return res.redirect("/socio/panel");
         } else {
-            return res.render("panelAdmin");
+            req.session.panelInfo = {
+                titulo: "Panel de usuario",
+                secciones: [
+                    {
+                        titulo: "Inicio",
+                        botones: [
+                            {
+                                nombre: "Zonas",
+                                link: "/zona/lista",
+                            },
+                            {
+                                nombre: "Estadísticas",
+                                link: "",
+                            },
+                        ],
+                    },
+                    {
+                        titulo: "Gestion",
+                        botones: [
+                            {
+                                nombre: "Usuarios",
+                                link: "",
+                            },
+                            {
+                                nombre: "Reportes",
+                                link: "",
+                            },
+                            {
+                                nombre: "Registros",
+                                link: "",
+                            },
+                        ],
+                    },
+                    {
+                        titulo: "Configuracion",
+                        botones: [
+                            {
+                                nombre: "Preferencias",
+                                link: "",
+                            },
+                            {
+                                nombre: "Pene",
+                                link: "",
+                            },
+                        ],
+                    },
+                ],
+            };
+            return res.redirect("/admin/panel");
         }
-
     } catch (error) {
         console.log(error);
-
         return res.status(400).json({ mensaje: error.message });
     }
+};
+
+export const getPanelSocio = async (req, res) => {
+    console.log("SESION:", req.session);
+    console.log("USUARIO:", req.session.usuario);
+    console.log("INFO PANEL: ", req.session.panelInfo);
+
+    res.render("panelSocio", {
+        usuario: req.session.usuario,
+        panelInfo: req.session.panelInfo,
+    });
+};
+
+export const getPanelAdmin = async (req, res) => {
+    console.log("SESION:", req.session);
+    console.log("USUARIO:", req.session.usuario);
+    console.log("INFO PANEL: ", req.session.panelInfo);
+
+    res.render("adminPanel", {
+        usuario: req.session.usuario,
+        panelInfo: req.session.panelInfo,
+    });
 };

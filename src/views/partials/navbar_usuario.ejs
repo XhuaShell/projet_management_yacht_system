@@ -1,0 +1,22 @@
+
+<div class="d-flex">
+    <div class="sidebar bg-dark text-white p-3">
+        <h4 class="mb-1 fw-bold"><%= panelInfo.titulo %> </h4>
+        <h5 class="mb-4 text-info" ><%= usuario.nombre %> </h5>
+
+        <hr class="my-3 linea-bonita" >
+
+        <nav class="nav flex-column">
+
+            <% for (let seccion of panelInfo.secciones) { %>
+                <span class="text-uppercase text-secondary small mb-2"><%= seccion.titulo %></span>
+                <% for (let boton of seccion.botones ) {%>
+                    <a href="<%= boton.link %>" class="nav-link text-white"><%= boton.nombre %></a>
+                <% } %>
+                <hr class="my-3 linea-bonita linea-bonita-secundaria" >
+            <% } %>
+        </nav>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="flex-grow-1 p-4">

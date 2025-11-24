@@ -1,0 +1,9 @@
+.linea-bonita {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, #444, #fff, #444);
+}
+
+.linea-bonita-secundaria {
+    background: linear-gradient(to right, #444, #777, #444);
+}

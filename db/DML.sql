@@ -12,3 +12,26 @@ INSERT INTO zonas (
     ("F", 95000.0, 18, 9.0, 30.0, 12.0, 4.5, 8.0, 4.0, 1.5),
     ("G", 250000.0, 50, 20.0, 60.0, 20.0, 9.0, 18.0, 8.0, 3.5),
     ("H", 140000.0, 24, 11.5, 38.0, 14.5, 5.8, 10.0, 5.0, 2.0);
+
+
+INSERT INTO usuarios
+(
+    cedula,
+    nombre,
+    direccion,
+    telefono,
+    fecha_vinculacion,
+    mail ,
+    tipo_usuario,
+    contrasena
+
+) VALUES (
+        '1034324105', 
+        'Jesus Peraza', 
+        'kr 87c xxx #xx - xx XX', 
+        '3043946278', 
+        '2020-01-01', 
+        'jdperazar@udistrital.edu.co', 
+        'ADMIN', 
+        '123456'
+);

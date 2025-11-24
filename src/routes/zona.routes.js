@@ -1,4 +1,3 @@
-
 export const nombre="zona"; 
 import { Router } from "express";
 const {mostrarFormulario, 
@@ -10,27 +9,13 @@ const {
     get
 }=await import (`../controller/${nombre}.controller.js`);
 
-
-
-
 const router =  Router();
 
-// Vista
-router.get(`/${nombre}/formulario`, mostrarFormulario);
-router.get(`/${nombre}/lista`, mostrarLista);
-/* router.get(`/${nombre}/edicion`, mostrarActualizacion);
-router.get(`/${nombre}/delete`, mostrarEliminacion); */
-router.get(`/${nombre}/main`, mostrarmain);
+router.get(`/formulario`, mostrarFormulario);
+router.get(`/lista`, mostrarLista);
+router.get(`/main`, mostrarmain);
 
-// API
-router.get(`/${nombre}/lista/1`,get);
-router.post(`/${nombre}/formulario`,create);
-/* router.patch(`/${nombre}/edicion`, parch);
-router.delete(`/${nombre}/delete`, deleter); */
-
-
-
-
-        
+router.get(`/lista/1`,get);
+router.post(`/formulario`,create);
 
 export default router;

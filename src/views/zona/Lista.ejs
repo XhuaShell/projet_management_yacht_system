@@ -1,48 +1,58 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Lista de Zonas</title>
-</head>
-<body>
+<%- include('../partials/header'); %>
 
-<h1>Lista de Zonas Registradas</h1>
+<div class="container mt-4">
 
-<table border="1">
-  <tr>
-    <th>Id Zona</th>
-    <th>Cuota Administración</th>
-    <th>Capacidad</th>
-    <th>Profundidad</th>
-    <th>Dim. Máx. Eslora</th>
-    <th>Dim. Máx. Manga</th>
-    <th>Dim. Máx. Calado</th>
-    <th>Dim. Mín. Eslora</th>
-    <th>Dim. Mín. Manga</th>
-    <th>Dim. Mín. Calado</th>
-  </tr>
+  <h1 class="mb-4 text-center">Lista de Zonas Registradas</h1>
 
-  <% objetosCons.forEach(z => { %>
-    <tr>
-      <td><%= z.id_zona %></td>
-      <td><%= z.cuota_administracion %></td>
-      <td><%= z.capacidad %></td>
-      <td><%= z.profundidad %></td>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Id Zona</th>
+          <th>Cuota Administración</th>
+          <th>Capacidad</th>
+          <th>Profundidad</th>
+          <th>Dim. Máx. Eslora</th>
+          <th>Dim. Máx. Manga</th>
+          <th>Dim. Máx. Calado</th>
+          <th>Dim. Mín. Eslora</th>
+          <th>Dim. Mín. Manga</th>
+          <th>Dim. Mín. Calado</th>
+        </tr>
+      </thead>
 
-      <td><%= z.dim_max_eslora %></td>
-      <td><%= z.dim_max_manga %></td>
-      <td><%= z.dim_max_calado %></td>
+      <tbody>
+        <% objetosCons.forEach(z => { %>
+          <tr>
+            <td><%= z.id_zona %></td>
+            <td><%= z.cuota_administracion %></td>
+            <td><%= z.capacidad %></td>
+            <td><%= z.profundidad %></td>
 
-      <td><%= z.dim_min_eslora %></td>
-      <td><%= z.dim_min_manga %></td>
-      <td><%= z.dim_min_calado %></td>
-    </tr>
-  <% }) %>
+            <td><%= z.dim_max_eslora %></td>
+            <td><%= z.dim_max_manga %></td>
+            <td><%= z.dim_max_calado %></td>
 
-</table>
+            <td><%= z.dim_min_eslora %></td>
+            <td><%= z.dim_min_manga %></td>
+            <td><%= z.dim_min_calado %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 
-<form action="/zona/lista/1" method="GET">
-  <button type="submit">Cargar lista</button>
-</form>
+  <form action="/zona/lista/1" method="GET" class="text-center mt-3">
+    <button type="submit" class="btn btn-primary">
+      Cargar lista
+    </button>
+  </form>
 
-</body>
-</html>
+</div>
+
+
+
+<%- include('../partials/footer'); %>
+
+
+necesito poner ésto bonito pero minimalista con boostrap como lo venía trabajando, con configuraciones básicas y por defecto de bootstrap:
