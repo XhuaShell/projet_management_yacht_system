@@ -6,7 +6,6 @@ export class Yate {
     #calado;
     #usuario_dueno_cedula;
     #id_tipo;
-    #empleado_cargo;
 
     constructor(yate = {}) {
         this.matricula = yate.matricula ?? null;
@@ -97,15 +96,8 @@ export class Yate {
     }
 
     // --- empleado_cargo ---
-    get empleado_cargo() {
-        return this.#empleado_cargo;
-    }
-    set empleado_cargo(value) {
-        if (value !== null && typeof value !== "number") {
-            throw new Error("El empleado_cargo debe ser un número");
-        }
-        this.#empleado_cargo = value;
-    }
+
+
 
     // --- toJSON ---
     toJSON() {
@@ -117,7 +109,7 @@ export class Yate {
             calado: this.#calado,
             usuario_dueno_cedula: this.#usuario_dueno_cedula,
             id_tipo: this.#id_tipo,
-            empleado_cargo: this.#empleado_cargo,
+            
         };
     }
 }

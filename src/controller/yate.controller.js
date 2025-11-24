@@ -6,11 +6,11 @@ import { Yate } from '../model/Yate.js';
 const nombreP="yate"; 
 const BD = new YateMysqlRepository();
 const BDTY= new TipoYateMysqlRepository();//consulta a la base de datos de los tipos de llate, para asi saber q tipos estan disponibles
-
+const tipos  = await BDTY.getAll();
 //req a server 
 export const mostrarFormulario = async (req, res) => {
   try {
-    const tipos  = await BDTY.getAll(); // obtiene el array de tipos
+     // obtiene el array de tipos
     res.render(`${nombreP}/Formulario`, { tipos});
   } catch (err) {
     console.error(err);
@@ -23,7 +23,7 @@ export const mostrarLista=(req,res) =>{
     res.render(`${nombreP}/Lista`, { objetosCons: [] }); // inicial vacío
 }
 export const mostrarActualizacion=(req,res)=>{
-    res.render(`${nombreP}/FormularioEdicion`)
+    res.render(`${nombreP}/FormularioEdicion`,{tipos})
 }
 export const mostrarEliminacion=(req,res)=>{
     res.render(`${nombreP}/Deleter`)
@@ -53,8 +53,8 @@ export const create=async(req,res) => {
     manga: Number(req.body.manga),
     calado: Number(req.body.calado),
     usuario_dueno_cedula: String(req.body.usuario_dueno_cedula),
-    id_tipo: Number(req.body.id_tipo),
-    empleado_cargo: Number(req.body.empleado_cargo)
+    id_tipo: Number(req.body.id_tipo)
+
     });
     console.log("REQ BODY:", req.body);
 
@@ -90,27 +90,41 @@ export const patch = async (req, res) => {
     empleado_cargo
   } = req.body;
 
-  const matricula = req.body.matricula; // suponiendo que la matrícula identifica al yate
+  const matricula = req.body.matricula; // identificador del yate
 
   try {
-    // Buscar el yate por matrícula para validar existencia
-    const yateExistente = await BD.findByMatricula(matricula);
-    if (!yateExistente) {
-      return res.status(404).send("Yate no encontrado");
+    console.log("Actualizando yates con matrícula:", matricula);
+    const yateExistente = await BD.findByMatricula(String(matricula));
+    if (!yateExistente) return res.status(404).send("Yate no encontrado");
+
+    const data = {};
+    data.matricula=matricula;
+    if (nombre) data.nombre = nombre;
+
+    // Validación segura de campos numéricos
+    if (eslora !== undefined && eslora !== "") {
+      const esloraNum = Number(eslora);
+      if (isNaN(esloraNum)) return res.status(400).send("La 200eslora debe ser un número");
+      data.eslora = esloraNum;
     }
 
-    // Construir objeto con solo los campos enviados
-    const data = {};
-    if (nombre) data.nombre = nombre;
-    if (eslora) data.eslora = Number(eslora);
-    if (manga) data.manga = Number(manga);
-    if (calado) data.calado = Number(calado);
-    if (usuario_dueno_cedula) data.usuario_dueno_cedula = usuario_dueno_cedula;
-    if (id_tipo) data.id_tipo = id_tipo;
-    if (empleado_cargo) data.empleado_cargo = empleado_cargo;
+    if (manga !== undefined && manga !== "") {
+      const mangaNum = Number(manga);
+      if (isNaN(mangaNum)) return res.status(400).send("La manga debe ser un número");
+      data.manga = mangaNum;
+    }
 
-    // Actualizar usando BD.put
-    const yateActualizado = await BD.put(matricula, data);
+    if (calado !== undefined && calado !== "") {
+      const caladoNum = Number(calado);
+      if (isNaN(caladoNum)) return res.status(400).send("El calado debe ser un número");
+      data.calado = caladoNum;
+    }
+
+    if (usuario_dueno_cedula) data.usuario_dueno_cedula = usuario_dueno_cedula;
+    if (id_tipo) data.id_tipo = Number(id_tipo);
+    if (empleado_cargo) data.empleado_cargo = Number(empleado_cargo);
+    console.log("Estoy antes de put y data.matricula es:",data.matricula);
+    const yateActualizado = await BD.put(data);
 
     res.redirect(`/${nombreP}/main`);
   } catch (err) {
@@ -120,12 +134,13 @@ export const patch = async (req, res) => {
 };
 
 
+
 //delete de socio
 // Delete de Yate
 export const deleter = (req, res) => {
     const { matricula } = req.body;
 
-    BD.delete(matricula);
+    BD.deleteByMatricula(matricula);
 
     console.log("Yate eliminado:", matricula);
 
