@@ -10,14 +10,12 @@ export const mostrarFormulario = (req, res) => {
 };
 export const mostrarLista = (req, res) => {
     //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
-    res.render(`${nombreP}/Lista`, { objetosCons: [] }); // inicial vacío
+    res.render(`${nombreP}/Lista`, {
+        objetosCons: [],
+        usuario: req.session.usuario,
+        panelInfo: req.session.panelInfo,
+    }); // inicial vacío
 };
-/* export const mostrarActualizacion=(req,res)=>{
-    res.render(`${nombreP}/FormularioEdicion`)
-}
-export const mostrarEliminacion=(req,res)=>{
-    res.render(`${nombreP}/Deleter`)
-} */
 export const mostrarmain = (req, res) => {
     res.render(`${nombreP}/main`);
 };

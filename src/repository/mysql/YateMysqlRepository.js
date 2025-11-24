@@ -37,34 +37,36 @@ export class YateMysqlRepository extends RepositoryBase {
     }
 
     async findByMatricula(matricula) {
-        console.log("Actualizando yate con matrícula:",matricula)
-    const [rows] = await pool.query(
-        "SELECT * FROM yates WHERE matricula = ?",
-        [String(matricula)]
-    );
+        console.log("Actualizando yate con matrícula:", matricula);
+        const [rows] = await pool.query(
+            "SELECT * FROM yates WHERE matricula = ?",
+            [String(matricula)]
+        );
 
-    if (rows.length === 0) return null;
+        if (rows.length === 0) return null;
 
-    const row = rows[0];
-    const yateData = {
-        matricula: String(row.matricula),
-        nombre: String(row.nombre),
-        eslora: row.eslora != null ? Number(row.eslora) : null,
-        manga: row.manga != null ? Number(row.manga) : null,
-        calado: row.calado != null ? Number(row.calado) : null,
-        usuario_dueno_cedula: row.usuario_dueno_cedula ? String(row.usuario_dueno_cedula) : null,
-        id_tipo: row.id_tipo != null ? Number(row.id_tipo) : null,
-        empleado_cargo: row.empleado_cargo != null ? Number(row.empleado_cargo) : null,
-    };
+        const row = rows[0];
+        const yateData = {
+            matricula: String(row.matricula),
+            nombre: String(row.nombre),
+            eslora: row.eslora != null ? Number(row.eslora) : null,
+            manga: row.manga != null ? Number(row.manga) : null,
+            calado: row.calado != null ? Number(row.calado) : null,
+            usuario_dueno_cedula: row.usuario_dueno_cedula
+                ? String(row.usuario_dueno_cedula)
+                : null,
+            id_tipo: row.id_tipo != null ? Number(row.id_tipo) : null,
+            empleado_cargo:
+                row.empleado_cargo != null ? Number(row.empleado_cargo) : null,
+        };
 
-    return new Yate(yateData);
-}
-
+        return new Yate(yateData);
+    }
 
     async findByNombre(nombre) {
         const [rows] = await pool.query(
             "SELECT * FROM yates WHERE nombre = ?",
-            [ String(nombre)]
+            [String(nombre)]
         );
         return rows.length > 0 ? new Yate(rows[0]) : null;
     }
@@ -72,7 +74,7 @@ export class YateMysqlRepository extends RepositoryBase {
     async getAllByDueno(cedula) {
         const [rows] = await pool.query(
             "SELECT * FROM yates WHERE usuario_dueno_cedula = ?",
-            [ String(cedula)]
+            [String(cedula)]
         );
 
         return rows.map(
@@ -150,9 +152,9 @@ export class YateMysqlRepository extends RepositoryBase {
     }
 
     async put(yate) {
-    console.log("Estoy enput y matricula:",yate.matricula)    
-    const existente = await this.findByMatricula(String(yate.matricula));
-    if (!existente) throw new Error("ERROR: El yate no existe.");
+        console.log("Estoy enput y matricula:", yate.matricula);
+        const existente = await this.findByMatricula(String(yate.matricula));
+        if (!existente) throw new Error("ERROR: El yate no existe.");
 
         // validar nombre único si cambió
         if (yate.nombre && yate.nombre !== existente.nombre) {
@@ -209,14 +211,13 @@ export class YateMysqlRepository extends RepositoryBase {
             str(yate.matricula),
         ];
 
-    const [result] = await pool.query(sql, params);
-    return result.affectedRows > 0;
-}
-
+        const [result] = await pool.query(sql, params);
+        return result.affectedRows > 0;
+    }
 
     async deleteByMatricula(matricula) {
         const sql = "DELETE FROM yates WHERE matricula = ?";
-        const [result] = await pool.query(sql, [ String(matricula)]);
+        const [result] = await pool.query(sql, [String(matricula)]);
         return result.affectedRows > 0;
     }
 }

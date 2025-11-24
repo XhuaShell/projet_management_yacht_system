@@ -23,7 +23,7 @@ export const autenticarUsuario = async function (req, res) {
                         botones: [
                             {
                                 nombre: "Zonas",
-                                link: "/zona/formulario",
+                                link: "/zona/lista",
                             },
                             {
                                 nombre: "Estadísticas",

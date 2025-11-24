@@ -114,7 +114,7 @@ export class UsuarioMysqlRepository extends RepositoryBase {
             throw new Error("El mail no se encontró en la base de datos.");
         }
 
-        if ( usuario.contrasena !== contrasena) {
+        if (usuario.contrasena !== contrasena) {
             throw new Error("La contraseña no coincide con el mail.");
         }
         return usuario;
