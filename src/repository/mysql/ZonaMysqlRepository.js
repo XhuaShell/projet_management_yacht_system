@@ -10,7 +10,7 @@ export class ZonaMsqlRepository extends RepositoryBase {
         return rows.map(
             (row) =>
                 new Zona({
-                    id_zona: str(row.id_zona),
+                    id_zona: String(row.id_zona),
                     cuota_administracion: float(row.cuota_administracion),
                     capacidad: int(row.capacidad),
                     profundidad: float(row.profundidad),
