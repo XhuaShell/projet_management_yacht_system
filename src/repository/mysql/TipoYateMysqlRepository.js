@@ -11,7 +11,7 @@ export class TipoYateMysqlRepository extends RepositoryBase {
             (row) =>
                 new TipoYate({
                     id_tipo: int(row.id_tipo),
-                    nombre: str(row.nombre),
+                    nombre: String(row.nombre),
                     descripcion: row.descripcion ?? null,
                 })
         );
