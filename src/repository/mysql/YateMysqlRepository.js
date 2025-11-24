@@ -55,7 +55,7 @@ export class YateMysqlRepository extends RepositoryBase {
     async findByNombre(nombre) {
         const [rows] = await pool.query(
             "SELECT * FROM yates WHERE nombre = ?",
-            [str(nombre)]
+            [ String(nombre)]
         );
         return rows.length > 0 ? new Yate(rows[0]) : null;
     }
@@ -63,7 +63,7 @@ export class YateMysqlRepository extends RepositoryBase {
     async getAllByDueno(cedula) {
         const [rows] = await pool.query(
             "SELECT * FROM yates WHERE usuario_dueno_cedula = ?",
-            [str(cedula)]
+            [ String(cedula)]
         );
 
         return rows.map(
@@ -222,7 +222,7 @@ export class YateMysqlRepository extends RepositoryBase {
 
     async deleteByMatricula(matricula) {
         const sql = "DELETE FROM yates WHERE matricula = ?";
-        const [result] = await pool.query(sql, [str(matricula)]);
+        const [result] = await pool.query(sql, [ String(matricula)]);
         return result.affectedRows > 0;
     }
 }

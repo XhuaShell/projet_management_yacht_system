@@ -11,7 +11,7 @@ export class TipoYateMysqlRepository extends RepositoryBase {
             (row) =>
                 new TipoYate({
                     id_tipo: int(row.id_tipo),
-                    nombre: String(row.nombre),
+                    nombre:  String(row.nombre),
                     descripcion: row.descripcion ?? null,
                 })
         );
@@ -73,7 +73,7 @@ export class TipoYateMysqlRepository extends RepositoryBase {
         `;
 
         const params = [
-            str(tipoYate.nombre),
+             String(tipoYate.nombre),
             tipoYate.descripcion ?? null,
             int(tipoYate.id_tipo),
         ];
