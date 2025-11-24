@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Yate</title>
+</head>
+<body>
+  <h1>Editar Yate</h1>
+
+  <form action="/yate/edicion/?_method=PATCH" method="POST">
+
+    <label for="matricula">Matrícula del yate:</label>
+    <input type="text" id="matricula" name="matricula" required><br><br>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre"><br><br>
+
+    <label for="eslora">Eslora (m):</label>
+    <input type="number" id="eslora" name="eslora" step="0.01"><br><br>
+
+    <label for="manga">Manga (m):</label>
+    <input type="number" id="manga" name="manga" step="0.01"><br><br>
+
+    <label for="calado">Calado (m):</label>
+    <input type="number" id="calado" name="calado" step="0.01"><br><br>
+
+    <label f

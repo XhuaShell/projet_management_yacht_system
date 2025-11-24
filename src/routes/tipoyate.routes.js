@@ -30,7 +30,7 @@ router.get(`/${nombre}/main`, mostrarmain);
 // API
 router.get(`/${nombre}/lista/1`,get);
 router.post(`/${nombre}/formulario`,create);
-router.patch(`/${nombre}/edicion`, parch);
+/*router.patch(`/${nombre}/edicion`, parch);*/
 router.delete(`/${nombre}/delete`, deleter); 
 
 

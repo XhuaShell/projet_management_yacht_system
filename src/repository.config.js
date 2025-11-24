@@ -16,7 +16,7 @@ const repositoryFactory = (type) => {
                 TipoYateRepository: new TipoYateMysqlRepository(),
                 AmarreRepository: new AmarreMysqlRepository(),
                 TipoYateRepository: new TipoYateMysqlRepository(),
-                YateRepository: new YateMysqlRepository(),
+               /* YateRepository: new YateMysqlRepository(),*/
             };
         case "postgres": {
         }
