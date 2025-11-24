@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Zonas</title>
+</head>
+<body>
+
+<h1>Lista de Zonas Registradas</h1>
+
+<table border="1">
+  <tr>
+    <th>Id Zona</th>
+    <th>Cuota Administración</th>
+    <th>Capacidad</th>
+    <th>Profundidad</th>
+    <th>Dim. Máx. Eslora</th>
+    <th>Dim. Máx. Manga</th>
+    <th>Dim. Máx. Calado</th>
+    <th>Dim. Mín. Eslora</th>
+    <th>Dim. Mín. Manga</th>
+    <th>Dim. Mín. Calado</th>
+  </tr>
+
+  <% objetosCons.forEach(z => { %>
+    <tr>
+      <td><%= z.id_zona %></td>
+      <td><%= z.cuota_administracion %></td>
+      <td><%= z.capacidad %></td>
+      <td><%= z.profundidad %></td>
+
+      <td><%= z.dim_max_eslora %></td>
+      <td><%= z.dim_max_manga %></td>
+      <td><%= z.dim_max_calado %></td>
+
+      <td><%= z.dim_min_eslora %></td>
+      <td><%= z.dim_min_manga %></td>
+      <td><%= z.dim_min_calado %></td>
+    </tr>
+  <% }) %>
+
+</table>
+
+<form action="/zona/lista/1" method="GET">
+  <button type="submit">Cargar lista</button>
+</form>
+
+</body>
+</html>
