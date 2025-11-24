@@ -56,9 +56,10 @@ export const create=async(req,res) => {
     id_tipo: Number(req.body.id_tipo),
     empleado_cargo: Number(req.body.empleado_cargo)
     });
-    res.send(yate);
+    console.log("REQ BODY:", req.body);
 
-    BD.save(yate);
+    const saved = await BD.save(yate);
+    console.log(yate);
     /* res.redirect(`/${nombreP}/main`); */
 } 
 //consulta get

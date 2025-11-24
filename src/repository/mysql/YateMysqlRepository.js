@@ -56,12 +56,12 @@ export class YateMysqlRepository extends RepositoryBase {
         return rows.map(
             (row) =>
                 new Yate({
-                    matricula: str(row.matricula),
-                    nombre: str(row.nombre),
+                    matricula: String(row.matricula),
+                    nombre: String(row.nombre),
                     eslora: row.eslora !== null ? float(row.eslora) : null,
                     manga: row.manga !== null ? float(row.manga) : null,
                     calado: row.calado !== null ? float(row.calado) : null,
-                    usuario_dueno_cedula: str(row.usuario_dueno_cedula),
+                    usuario_dueno_cedula: String(row.usuario_dueno_cedula),
                     id_tipo: row.id_tipo !== null ? int(row.id_tipo) : null,
                     empleado_cargo:
                         row.empleado_cargo !== null
@@ -120,12 +120,12 @@ export class YateMysqlRepository extends RepositoryBase {
         `;
 
         const params = [
-            str(yate.matricula),
-            str(yate.nombre),
+            String(yate.matricula),
+            String(yate.nombre),
             yate.eslora ?? null,
             yate.manga ?? null,
             yate.calado ?? null,
-            str(yate.usuario_dueno_cedula),
+            String(yate.usuario_dueno_cedula),
             yate.id_tipo ?? null,
             yate.empleado_cargo ?? null,
         ];
