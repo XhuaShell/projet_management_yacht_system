@@ -12,5 +12,4 @@ router.post("/autenticar/login", autenticarUsuario);
 router.get('/socio/panel', getPanelSocio)
 router.get('/admin/panel', getPanelAdmin)
 
-
 export default router;
