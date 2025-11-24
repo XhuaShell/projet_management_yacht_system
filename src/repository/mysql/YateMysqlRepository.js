@@ -3,13 +3,8 @@ import { Yate } from "../../model/Yate.js";
 import { str, int, float } from "../Validaciones.js";
 
 import { pool } from "../config/mysql.config.db.js";
-import { EmpleadoMysqlRepository } from "./EmpleadoMysqlRepository.js";
 import { UsuarioMysqlRepository } from "./UsuarioMysqlRepository.js";
 import { TipoYateMysqlRepository } from "./TipoYateMysqlRepository.js";
-
-const dber = {
-    EmpleadoMysqlRepository,
-};
 
 export class YateMysqlRepository extends RepositoryBase {
     constructor() {
@@ -122,14 +117,6 @@ export class YateMysqlRepository extends RepositoryBase {
             );
             if (!tipo)
                 throw new Error("ERROR: El tipo de yate (id_tipo) no existe.");
-        }
-
-        // empleado cargo existente si viene
-        if (yate.empleado_cargo) {
-            const emp = await dber.EmpleadoRepository.findById(
-                yate.empleado_cargo
-            );
-            if (!emp) throw new Error("ERROR: El empleado asignado no existe.");
         }
 
         const sql = `

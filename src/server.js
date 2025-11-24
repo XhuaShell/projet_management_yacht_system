@@ -9,7 +9,6 @@ import path from "path";
 
 import amarreRouter from "./routes/amarre.routes.js";
 import asignacionRouter from "./routes/asignacion.routes.js";
-import empleadoRouter from "./routes/empleado.routes.js";
 import indexRouter from "./routes/index.routes.js"; 
 import socioRouter from "./routes/socio.routes.js";
 import yateRouter from "./routes/yate.routes.js";
@@ -39,7 +38,7 @@ app.use(
 
 app.use("/", indexRouter);
 
-// middleware global para exponer variables en vistas
+// Éste es in middleware global para exponer variables en las demás vistas
 app.use((req, res, next) => {
     res.locals.usuario = req.session.usuario || null;
     res.locals.panelInfo = res.locals.panelInfo || {};
@@ -50,7 +49,6 @@ app.use("/socio", socioRouter);
 app.use("/yate", yateRouter);
 app.use("/amarre", amarreRouter);
 app.use("/asignacion", asignacionRouter);
-app.use("/empleado", empleadoRouter);
 app.use("/zona", zonaRouter);
 app.use("/tipoyate", tipoyateRouter);
 

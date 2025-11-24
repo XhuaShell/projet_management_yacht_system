@@ -51,6 +51,7 @@ export const create = async (req, res) => {
     BD.save(nuevo_Usuario);
     res.redirect(`/${nombreP}/main`);
 };
+
 //consulta get
 export const get = async (req, res) => {
     try {
