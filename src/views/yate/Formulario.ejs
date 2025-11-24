@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario Yate</title>
+</head>
+<body>
+  <h1>Registrar Yate</h1>
+  <form action="/yate/formulario" method="POST">
+
+    <label for="matricula">Matrícula:</label>
+    <input type="text" id="matricula" name="matricula" required><br><br>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <label for="eslora">Eslora (m):</label>
+    <input type="number" id="eslora" name="eslora" step="0.01" required><br><br>
+
+    <label for="manga">Manga (m):</label>
+    <input type="number" id="manga" name="manga" step="0.01" required><br><br>
+
+    <label for="calado">Calado (m):</label>
+    <input type="number" id="calado" name="calado" step="0.01" required><br><br>
+
+    <label for="usuario_dueno_cedula">Cédula del Dueño:</label>
+    <input type="text" id="usuario_dueno_cedula" name="usuario_dueno_cedula" required><br><br>
+
+    <label for="id_tipo">Tipo de Yate:</label>
+    <select id="id_tipo" name="id_tipo" required>
+      <option disabled selected value="">Seleccione un tipo</option>
+      <% tipos.forEach(t => { %>
+        <option value="<%= t.id_tipo %>"><%= t.id_tipo %></option>
+      <% }) %>
+    </select>
+    <br><br>
+
+    <label for="empleado_cargo">Numero de empleados a cargo:</label>
+    <input type="text" id="empleado_cargo" name="empleado_cargo" ><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>

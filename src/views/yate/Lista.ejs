@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Yates</title>
+</head>
+<body>
+
+<h1>Lista de Yates Registrados</h1>
+
+<table border="1">
+  <tr>
+    <th>Matrícula</th>
+    <th>Nombre</th>
+    <th>Eslora (m)</th>
+    <th>Manga (m)</th>
+    <th>Calado (m)</th>
+    <th>Cédula del Dueño</th>
+    <th>Tipo de Yate (ID)</th>
+    <th>Empleado Responsable</th>
+  </tr>
+
+  <% objetosCons.forEach(y => { %>
+    <tr>
+      <td><%= y.matricula %></td>
+      <td><%= y.nombre %></td>
+      <td><%= y.eslora %></td>
+      <td><%= y.manga %></td>
+      <td><%= y.calado %></td>
+      <td><%= y.usuario_dueno_cedula %></td>
+      <td><%= y.id_tipo %></td>
+      <td><%= y.empleado_cargo %></td>
+    </tr>
+  <% }) %>
+
+</table>
+
+<form action="/yate/lista/1" method="GET">
+  <button type="submit">Cargar lista</button>
+</form>
+
+</body>
+</html>

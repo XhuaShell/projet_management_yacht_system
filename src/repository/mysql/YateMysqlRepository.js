@@ -3,6 +3,11 @@ import { Yate } from "../../model/Yate.js";
 import { pool } from "../config/mysql.config.db.js";
 import { REPOSITORY } from "../../repository.config.js";
 import { str, int, float } from "../Validaciones.js";
+import {EmpleadoMysqlRepository} from './EmpleadoMysqlRepository.js';
+
+const dber = {
+  EmpleadoMysqlRepository
+};
 
 export class YateMysqlRepository extends RepositoryBase {
     async getAll() {
@@ -94,7 +99,7 @@ export class YateMysqlRepository extends RepositoryBase {
 
         // empleado cargo existente si viene
         if (yate.empleado_cargo) {
-            const emp = await REPOSITORY.EmpleadoRepository.findById(
+            const emp = await dber.EmpleadoRepository.findById(
                 yate.empleado_cargo
             );
             if (!emp)
