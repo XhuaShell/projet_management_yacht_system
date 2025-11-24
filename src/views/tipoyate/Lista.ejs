@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Tipos de yate</title>
+</head>
+<body>
+
+<h1>Lista de Tipos Registrados</h1>
+
+<table border="1">
+  <tr>
+    <th>ID Tipo</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+  </tr>
+
+  <% objetosCons.forEach(t => { %>
+    <tr>
+      <td><%= t.id_tipo %></td>
+      <td><%= t.nombre %></td>
+      <td><%= t.descripcion %></td>
+    </tr>
+  <% }) %>
+
+</table>
+
+<form action="/tipoyate/lista/1" method="GET">
+  <button type="submit">Cargar lista</button>

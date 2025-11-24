@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Formulario Tipo yate</title>
+</head>
+<body>
+  <h1>Registrar Tipo de yate</h1>
+  <form action="/tipoyate/edicion/?_method=PATCH" method="POST">
+
+
+    <label for="id_tipo">ID Tipo yate:</label> 
+    <input type="number" id="id_tipo" name="id_tipo" required><br>
+    <br> 
+    <label for="nombre">Nombre:</label> 
+    <input type="text" id="nombre" name="nombre" ><br>
+    <br> <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" ><br>
+    <br> <button type="submit">Enviar</button>
+    
+  </form>
+</body>
+</html>

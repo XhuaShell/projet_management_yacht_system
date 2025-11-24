@@ -16,6 +16,7 @@ import pagoRouter from "./routes/pago.routes.js";
 import socioRouter from "./routes/socio.routes.js";
 import yateRouter from "./routes/yate.routes.js";
 import zonaRouter from "./routes/zona.routes.js";
+import tipoyateRouter from "./routes/tipoyate.routes.js"
 import methodOverride from "method-override";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.use(zonaRouter);
+app.use(tipoyateRouter);
 app.use(amarreRouter);
 app.use(asignacionRouter);
 app.use(clubRouter);
