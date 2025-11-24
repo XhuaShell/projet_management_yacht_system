@@ -55,11 +55,12 @@ export const get=async(req,res)=>{
 }
 
 //consulta update
- export const parch = async (req, res) => {
+/*  export const parch = async (req, res) => {
   const { 
     nombre,
     descripcion
       } = req.body;
+
   const codigo = req.body.id_tipo; // suponiendo que el código identifica al socio
       console.log(codigo)
     // Buscar al socio por código para validar existencia
@@ -78,13 +79,13 @@ export const get=async(req,res)=>{
 
     res.redirect(`/${nombre}/main`)
  
-};
+}; */
 
 //delete de socio
 export const deleter=(req, res) => {
     const { codigo } = req.body;
     
-    BD.delete(codigo);
+    BD.deleteById(codigo);
 
     console.log("Empleado eliminado:" );
 
