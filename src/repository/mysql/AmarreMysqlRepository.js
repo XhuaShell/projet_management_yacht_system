@@ -21,9 +21,9 @@ export class AmarreMysqlRepository extends RepositoryBase {
         return rows.map((row) =>
             new Amarre({
                 num_amarre: int(row.num_amarre),
-                id_zona: str(row.id_zona),
+                id_zona:  String(row.id_zona),
                 usuario_propietario_cedula: row.usuario_propietario_cedula 
-                    ? str(row.usuario_propietario_cedula) 
+                    ?  String(row.usuario_propietario_cedula) 
                     : null,
                 fecha_compra: row.fecha_compra ? new Date(row.fecha_compra) : null,
             })
@@ -39,9 +39,9 @@ export class AmarreMysqlRepository extends RepositoryBase {
         return rows.length > 0
             ? new Amarre({
                   num_amarre: int(rows[0].num_amarre),
-                  id_zona: str(rows[0].id_zona),
+                  id_zona:  String(rows[0].id_zona),
                   usuario_propietario_cedula: rows[0].usuario_propietario_cedula
-                      ? str(rows[0].usuario_propietario_cedula)
+                      ?  String(rows[0].usuario_propietario_cedula)
                       : null,
                   fecha_compra: rows[0].fecha_compra ? new Date(rows[0].fecha_compra) : null,
               })
@@ -57,9 +57,9 @@ export class AmarreMysqlRepository extends RepositoryBase {
         return rows.map((row) =>
             new Amarre({
                 num_amarre: int(row.num_amarre),
-                id_zona: str(row.id_zona),
+                id_zona:  String(row.id_zona),
                 usuario_propietario_cedula: row.usuario_propietario_cedula
-                    ? str(row.usuario_propietario_cedula)
+                    ?  String(row.usuario_propietario_cedula)
                     : null,
                 fecha_compra: row.fecha_compra ? new Date(row.fecha_compra) : null,
             })
@@ -75,9 +75,9 @@ export class AmarreMysqlRepository extends RepositoryBase {
         return rows.map((row) =>
             new Amarre({
                 num_amarre: int(row.num_amarre),
-                id_zona: str(row.id_zona),
+                id_zona:  String(row.id_zona),
                 usuario_propietario_cedula: row.usuario_propietario_cedula
-                    ? str(row.usuario_propietario_cedula)
+                    ?  String(row.usuario_propietario_cedula)
                     : null,
                 fecha_compra: row.fecha_compra ? new Date(row.fecha_compra) : null,
             })
@@ -118,9 +118,9 @@ export class AmarreMysqlRepository extends RepositoryBase {
 
         const params = [
             int(amarre.num_amarre),
-            str(amarre.id_zona),
+             String(amarre.id_zona),
             amarre.usuario_propietario_cedula
-                ? str(amarre.usuario_propietario_cedula)
+                ?  String(amarre.usuario_propietario_cedula)
                 : null,
             amarre.fecha_compra ? date(amarre.fecha_compra) : null,
         ];
@@ -151,7 +151,7 @@ export class AmarreMysqlRepository extends RepositoryBase {
 
         const params = [
             amarre.usuario_propietario_cedula
-                ? str(amarre.usuario_propietario_cedula)
+                ?  String(amarre.usuario_propietario_cedula)
                 : null,
             amarre.fecha_compra ? date(amarre.fecha_compra) : null,
             int(amarre.num_amarre),

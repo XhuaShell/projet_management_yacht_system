@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Editar Yate</title>
+  <title>Formulario Yate</title>
 </head>
 <body>
-  <h1>Editar Yate</h1>
-
+  <h1>Registrar Yate</h1>
   <form action="/yate/edicion/?_method=PATCH" method="POST">
 
-    <label for="matricula">Matrícula del yate:</label>
-    <input type="text" id="matricula" name="matricula" required><br><br>
+    <label for="matricula">Matrícula:</label>
+    <input type="text" id="matricula" name="matricula" ><br><br>
 
     <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre"><br><br>
+    <input type="text" id="nombre" name="nombre" ><br><br>
 
     <label for="eslora">Eslora (m):</label>
-    <input type="number" id="eslora" name="eslora" step="0.01"><br><br>
+    <input type="number" id="eslora" name="eslora" step="0.01" ><br><br>
 
     <label for="manga">Manga (m):</label>
-    <input type="number" id="manga" name="manga" step="0.01"><br><br>
+    <input type="number" id="manga" name="manga" step="0.01" ><br><br>
 
     <label for="calado">Calado (m):</label>
-    <input type="number" id="calado" name="calado" step="0.01"><br><br>
+    <input type="number" id="calado" name="calado" step="0.01" ><br><br>
 
-    <label f
+    <label for="usuario_dueno_cedula">Cédula del Dueño:</label>
+    <input type="text" id="usuario_dueno_cedula" name="usuario_dueno_cedula" ><br><br>
+
+    <label for="id_tipo">Tipo de Yate:</label>
+    <select id="id_tipo" name="id_tipo" >
+      <option disabled selected value="">Seleccione un tipo</option>
+      <% tipos.forEach(t => { %>
+        <option value="<%= t.id_tipo %>"><%= t.id_tipo %></option>
+      <% }) %>
+    </select>
+    <br><br>
+
+
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>
