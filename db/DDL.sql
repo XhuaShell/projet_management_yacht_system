@@ -161,3 +161,5 @@ CREATE TABLE usar (
     FOREIGN KEY (cod_servicio) REFERENCES servicios (cod_servicio),
     FOREIGN KEY (num_amarre) REFERENCES amarres (num_amarre)
 );
+
+
