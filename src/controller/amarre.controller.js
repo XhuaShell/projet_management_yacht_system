@@ -1,17 +1,31 @@
 import { AmarreMysqlRepository } from "../repository/mysql/AmarreMysqlRepository.js";
 
 import { Amarre } from "../model/Amarre.js";
+import { ZonaMsqlRepository } from "../repository/mysql/ZonaMysqlRepository.js";
 const nombreP = "amarre";
 const BD = new AmarreMysqlRepository();
+const BDZONA = new ZonaMsqlRepository();
 
 //req a server
-export const mostrarFormulario = (req, res) => {
-    res.render(`${nombreP}/Formulario`);
-};
-export const mostrarLista = (req, res) => {
+export const mostrarFormulario = async (req, res) => {
+    let zonas = await BDZONA.getAll();
+    zonas = zonas.map((zona) => zona.toJSON());
     //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
-    res.render(`${nombreP}/Lista`, { objetosCons: [] }); // inicial vacío
+    res.render(`${nombreP}/Formulario`, {
+        usuario: req.session.usuario,
+        panelInfo: req.session.panelInfo,
+        zonas: zonas,
+    });
 };
+
+export const mostrarLista = async (req, res) => {
+    res.render(`${nombreP}/Lista`, {
+        objetosCons: [],
+        usuario: req.session.usuario,
+        panelInfo: req.session.panelInfo,
+    });
+};
+
 export const mostrarActualizacion = (req, res) => {
     res.render(`${nombreP}/FormularioEdicion`);
 };
@@ -24,19 +38,34 @@ export const mostrarmain = (req, res) => {
 
 //req a BD
 export const create = async (req, res) => {
-    const { num_amarre, id_zona, usuario_propietario_cedula, fecha_compra } =
-        req.body;
+    try {
+        const {
+            num_amarre,
+            id_zona,
+            usuario_propietario_cedula,
+            fecha_compra,
+        } = req.body;
 
-    const amarre = new Amarre({
-        num_amarre: Number(req.body.num_amarre),
-        id_zona: req.body.id_zona,
-        usuario_propietario_cedula: req.body.usuario_propietario_cedula,
-        fecha_compra: req.body.fecha_compra,
+        const amarre = new Amarre({
+            num_amarre: Number(req.body.num_amarre),
+            id_zona: req.body.id_zona,
+            usuario_propietario_cedula: req.body.usuario_propietario_cedula,
+            fecha_compra: req.body.fecha_compra,
+        });
+
+        BD.save(amarre);
+
+        res.redirect('/admin/panl');
+
+  } catch (err) {
+    console.error(err.message);
+
+    res.status(400).render(`${nombreP}/Formulario`, {
+      error: err.message,
+      usuario: req.session.usuario,
+      panelInfo: req.session.panelInfo,
     });
-
-    BD.save(amarre);
-    res.redirect(`/${nombreP}/main`);
-};
+}};
 //consulta get
 export const get = async (req, res) => {
     try {

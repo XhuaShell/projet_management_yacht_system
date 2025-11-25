@@ -1,25 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Formulario Amarre</title>
-</head>
-<body>
-  <h1>Registrar Amarre</h1>
-  <form action="/amarre/formulario" method="POST">
+<%- include('../partials/header'); %> <%- include('../partials/navbar_usuario');
+%>
 
-    <label for="num_amarre">Codigo de Amarre:</label>
-    <input type="number" id="num_amarre" name="num_amarre" required><br><br>
+<div class="card shadow-sm rounded p-4">
+    <h2 class="mb-4 text-center">Registrar Amarre</h2>
 
-    <label for="id_zona">id_zona:</label>
-    <input type="text" id="id_zona" name="id_zona" required><br><br>
+    <form action="/amarre/formulario" method="POST">
+        <div class="mb-3">
+            <label for="num_amarre" class="form-label">Código de Amarre</label>
+            <input
+                type="number"
+                class="form-control"
+                id="num_amarre"
+                name="num_amarre"
+                required
+            />
+        </div>
+        <div class="mb-3">
+            <label for="id_zona" class="form-label">ID de Zona</label>
+            <select name="id_zona" id="id_zona" class="form-select" required>
+                <% for (let zona of zonas) { %>
+                <option value="<%= zona.id_zona %>"><%= zona.id_zona %></option>
+                <% } %>
+            </select>
+        </div>
 
-    <label for="usuario_propietario_cedula">Cedula del propietario:</label>
-    <input type="text" id="usuario_propietario_cedula" name="usuario_propietario_cedula" required><br><br>
+        <div class="mb-3">
+            <label for="usuario_propietario_cedula" class="form-label"
+                >Cédula del Propietario</label
+            >
+            <input
+                type="text"
+                class="form-control"
+                id="usuario_propietario_cedula"
+                name="usuario_propietario_cedula"
+            />
+        </div>
 
-    <label for="fecha_compra">fecha_compra:</label>
-    <input type="date" id="fecha_compra" name="fecha_compra" required><br><br>
+        <div class="mb-3">
+            <label for="fecha_compra" class="form-label">Fecha de Compra</label>
+            <input
+                type="date"
+                class="form-control"
+                id="fecha_compra"
+                name="fecha_compra"
+            />
+        </div>
 
-    <button type="submit">Enviar</button>
-  </form>
-</body>
-</html>
+        <button type="submit" class="btn btn-dark w-100">Enviar</button>
+    </form>
+</div>
+
+<%- include('../partials/navbar_footer'); %> <%- include('../partials/footer');
+%>
