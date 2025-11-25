@@ -25,6 +25,12 @@ export class UsuarioMysqlRepository extends RepositoryBase {
     }
 
     async save(usuario) {
+        if (!usuario.cedula || !usuario.mail || !usuario.contrasena) {
+            throw new Error(
+                "Hay un poquito de entrada en tu error: Faltan datos trocito de teton."
+            );
+        }
+
         if (await this.findById(usuario.cedula)) {
             throw new Error(
                 "ERROR: La cédula que intentaste usar ya está registrada."

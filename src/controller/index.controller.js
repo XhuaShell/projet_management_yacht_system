@@ -17,6 +17,7 @@ export const autenticarUsuario = async function (req, res) {
         if (user.tipo_usuario === "SOCIO") {
             req.session.panelInfo = {
                 titulo: "Panel Socio",
+                link_panel: "/socio/panel",
                 secciones: [
                     {
                         titulo: "Amarres",
@@ -49,15 +50,11 @@ export const autenticarUsuario = async function (req, res) {
                         ],
                     },
                     {
-                        titulo: "Configuracion",
+                        titulo: "Cuenta",
                         botones: [
                             {
-                                nombre: "Preferencias",
-                                link: "",
-                            },
-                            {
-                                nombre: "Pene",
-                                link: "",
+                                nombre: "Actualización",
+                                link: "/socio/informacion",
                             },
                         ],
                     },
@@ -66,17 +63,18 @@ export const autenticarUsuario = async function (req, res) {
             return res.redirect("/socio/panel");
         } else {
             req.session.panelInfo = {
-                titulo: "Panel de usuario",
+                titulo: "Panel de Administrador",
+                link_panel: "/admin/panel",
                 secciones: [
                     {
                         titulo: "Inicio",
                         botones: [
                             {
-                                nombre: "Zonas",
-                                link: "/zona/lista",
+                                nombre: "Amarres",
+                                link: "",
                             },
                             {
-                                nombre: "Estadísticas",
+                                nombre: "Yates",
                                 link: "",
                             },
                         ],
@@ -85,29 +83,33 @@ export const autenticarUsuario = async function (req, res) {
                         titulo: "Gestion",
                         botones: [
                             {
-                                nombre: "Usuarios",
-                                link: "",
+                                nombre: "Zonas",
+                                link: "/zona/lista",
                             },
                             {
-                                nombre: "Reportes",
-                                link: "",
+                                nombre: "Empleados",
+                                link: "/funcionNoTerminada",
                             },
                             {
-                                nombre: "Registros",
-                                link: "",
+                                nombre: "Ventas",
+                                link: "/funcionNoTerminada",
+                            },
+                            {
+                                nombre: "Servicios",
+                                link: "/funcionNoTerminada",
+                            },
+                            {
+                                nombre: "Ventas",
+                                link: "/funcionNoTerminada",
                             },
                         ],
                     },
                     {
-                        titulo: "Configuracion",
+                        titulo: "Cuenta",
                         botones: [
                             {
-                                nombre: "Preferencias",
-                                link: "",
-                            },
-                            {
-                                nombre: "Pene",
-                                link: "",
+                                nombre: "Actualización",
+                                link: "/socio/informacion",
                             },
                         ],
                     },
@@ -142,3 +144,10 @@ export const getPanelAdmin = async (req, res) => {
         panelInfo: req.session.panelInfo,
     });
 };
+
+export const funcionNoTerminada = async (req, res) => {
+    res.render('funcionNoTerminada', { 
+        usuario: req.session.usuario,
+        panelInfo: req.session.panelInfo,
+    });
+}

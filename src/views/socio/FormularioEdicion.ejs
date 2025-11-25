@@ -1,29 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Formulario Socio</title>
-</head>
-<body>
-  <h1>Editar Socio</h1>
-  <form action="/socio/edicion/?_method=PATCH" method="POST">
+<%- include('../partials/header'); %>
+<%- include('../partials/navbar_usuario'); %>
 
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Editar Información del Socio</h4>
+    </div>
 
-    <label for="cedula">Cedula de socio:</label>
-    <input type="text" id="cedula" name="cedula" required><br><br>
+    <div class="card-body">
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" ><br><br>
+      <form action="/socio/edicion/?_method=PATCH" method="POST">
 
-    <label for="direccion">Direccion:</label>
-    <input type="text" id="direccion" name="direccion" ><br><br>
+        <div class="card-body">
+          <p><strong>Cédula:</strong> <%= usuario.cedula %></p>
+          <p><strong>Email:</strong> <%= usuario.mail %></p>
+          <p><strong>Tipo de Usuario:</strong> <%= usuario.tipo_usuario %></p>
+        </div>
 
-    <label for="telefono">Numero telefonico:</label>
-    <input type="number" id="telefono" name="telefono" ><br><br>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="nombre" 
+            name="nombre" 
+            value="<%= usuario.nombre %>"
+          >
+        </div>
 
-    <label for="fecha_vinculacion">Fecha de Vinculacion:</label>
-    <input type="date" id="fecha_vinculacion" name="fecha_vinculacion" ><br><br>
-  
-    <button type="submit">Enviar</button>
-  </form>
-</body>
-</html>
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="direccion" 
+            name="direccion" 
+            value="<%= usuario.direccion %>"
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Número Telefónico</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="telefono" 
+            name="telefono" 
+            value="<%= usuario.telefono %>"
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="fecha_vinculacion" class="form-label">Fecha de Vinculación</label>
+          <input 
+            type="date" 
+            class="form-control" 
+            id="fecha_vinculacion" 
+            name="fecha_vinculacion" 
+            value="<%= usuario.fecha_vinculacion %>"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+          Guardar Cambios
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<%- include('../partials/navbar_footer'); %>
+<%- include('../partials/footer'); %>

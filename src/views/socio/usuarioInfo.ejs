@@ -1,0 +1,32 @@
+<%- include('../partials/header'); %>
+<%- include('../partials/navbar_usuario'); %>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Información del Usuario</h4>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Cédula:</strong> <%= usuario.cedula %></p>
+      <p><strong>Nombre:</strong> <%= usuario.nombre %></p>
+      <p><strong>Dirección:</strong> <%= usuario.direccion %></p>
+      <p><strong>Teléfono:</strong> <%= usuario.telefono %></p>
+      <p><strong>Fecha de Vinculación:</strong> 
+        <%= new Date(usuario.fecha_vinculacion).toLocaleDateString() %>
+      </p>
+      <p><strong>Email:</strong> <%= usuario.mail %></p>
+      <p><strong>Tipo de Usuario:</strong> <%= usuario.tipo_usuario %></p>
+    </div>
+
+    <div class="card-footer text-end">
+      <a href="/socio/edicion/" class="btn btn-primary">
+        Actualizar Información
+      </a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/navbar_footer'); %>
+<%- include('../partials/footer'); %>
+

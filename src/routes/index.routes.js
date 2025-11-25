@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { autenticarUsuario, getPanelAdmin, getPanelSocio } from "../controller/index.controller.js";
+import { autenticarUsuario, funcionNoTerminada, getPanelAdmin, getPanelSocio } from "../controller/index.controller.js";
 
 const router = Router();
 
@@ -11,5 +11,6 @@ router.post("/autenticar/login", autenticarUsuario);
 // Peticiones de usuarios logueadas
 router.get('/socio/panel', getPanelSocio)
 router.get('/admin/panel', getPanelAdmin)
+router.get('/funcionNoTerminada', funcionNoTerminada) 
 
 export default router;
