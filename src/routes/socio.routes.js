@@ -5,8 +5,9 @@ const {mostrarFormulario,
     mostrarLista, 
     mostrarActualizacion, 
     mostrarEliminacion,
-    mostrarmain
-} = await import(`../controller/${nombre}.controller.js`);
+    mostrarmain,
+    verUsuarioInfo
+} = await import (`../controller/${nombre}.controller.js`);
 const {
     create,
     parch,
@@ -25,6 +26,7 @@ router.get(`/lista`, mostrarLista);
 router.get(`/edicion`, mostrarActualizacion);
 router.get(`/delete`, mostrarEliminacion);
 router.get(`/main`, mostrarmain);
+router.get(`/informacion`, verUsuarioInfo)
 
 // API
 router.get(`/lista/1`,get);

@@ -9,13 +9,6 @@ export class Usuario {
     #tipo_usuario;
 
     constructor(user = {}) {
-        if (
-            typeof user.cedula !== "string" ||
-            typeof user.contrasena !== "string"
-        ) {
-            throw new Error("Información no ingresada correctamente");
-        }
-
         this.cedula = user.cedula ?? null;
         this.nombre = user.nombre ?? null;
         this.direccion = user.direccion ?? null;
