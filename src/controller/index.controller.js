@@ -75,7 +75,7 @@ export const autenticarUsuario = async function (req, res) {
                             },
                             {
                                 nombre: "Yates",
-                                link: "",
+                                link: "/yate/lista",
                             },
                         ],
                     },

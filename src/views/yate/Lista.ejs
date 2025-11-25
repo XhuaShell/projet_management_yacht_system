@@ -1,41 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Lista de Yates</title>
-</head>
-<body>
+<%- include('../partials/header'); %>
+<%- include('../partials/navbar_usuario'); %>
 
-<h1>Lista de Yates Registrados</h1>
+<div class="container mt-4">
 
-<table border="1">
-  <tr>
-    <th>Matrícula</th>
-    <th>Nombre</th>
-    <th>Eslora (m)</th>
-    <th>Manga (m)</th>
-    <th>Calado (m)</th>
-    <th>Cédula del Dueño</th>
-    <th>Tipo de Yate (ID)</th>
-  </tr>
+    <h1 class="mb-4 text-white">Lista de Yates Registrados</h1>
 
-  <% objetosCons.forEach(y => { %>
-    <tr>
-      <td><%= y.matricula %></td>
-      <td><%= y.nombre %></td>
-      <td><%= y.eslora %></td>
-      <td><%= y.manga %></td>
-      <td><%= y.calado %></td>
-      <td><%= y.usuario_dueno_cedula %></td>
-      <td><%= y.id_tipo %></td>
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nombre</th>
+                    <th>Eslora (m)</th>
+                    <th>Manga (m)</th>
+                    <th>Calado (m)</th>
+                    <th>Cédula del Dueño</th>
+                    <th>Tipo de Yate (ID)</th>
+                </tr>
+            </thead>
 
-    </tr>
-  <% }) %>
+            <tbody>
+                <% objetosCons.forEach(y => { %>
+                    <tr>
+                        <td><%= y.matricula %></td>
+                        <td><%= y.nombre %></td>
+                        <td><%= y.eslora %></td>
+                        <td><%= y.manga %></td>
+                        <td><%= y.calado %></td>
+                        <td><%= y.usuario_dueno_cedula %></td>
+                        <td><%= y.id_tipo %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
 
-</table>
+    <nav class="nav mb-4 p-2 bg-dark rounded shadow-sm">
+        <a href="/yate/lista/1" class="btn btn-outline-light me-2">Cargar lista</a>
+        <a href="/yate/crear" class="btn btn-outline-light me-2">Agregar Yate</a>
+        <a href="#" class="btn btn-outline-light me-2">Listar por dueño</a>
+        <a href="#" class="btn btn-outline-light">Otra acción</a>
+    </nav>
 
-<form action="/yate/lista/1" method="GET">
-  <button type="submit">Cargar lista</button>
-</form>
+</div>
 
-</body>
-</html>
+<%- include('../partials/navbar_footer'); %>
+<%- include('../partials/footer'); %>
