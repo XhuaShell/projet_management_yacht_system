@@ -41,7 +41,7 @@ export const create=async(req,res) => {
         tipo_usuario: "SOCIO" // si quieres
     });
     BD.save(nuevo_Usuario);
-    res.redirect(`/${nombreP}/main`);
+    res.redirect(`/${nombreP}/registro`);
 } 
 //consulta get
 export const get=async(req,res)=>{
