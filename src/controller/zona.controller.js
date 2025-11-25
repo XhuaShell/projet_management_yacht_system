@@ -9,6 +9,8 @@ export const mostrarFormulario = (req, res) => {
     res.render(`${nombreP}/Formulario`);
 };
 export const mostrarLista = (req, res) => {
+    console.log(req.session.panelInfo);
+
     //mi solucion seria: carga la pagina sin valores, poner un boton y formulario y ahi si hacer la consulta despues del get
     res.render(`${nombreP}/Lista`, {
         objetosCons: [],

@@ -41,7 +41,7 @@ app.use("/", indexRouter);
 // Éste es in middleware global para exponer variables en las demás vistas
 app.use((req, res, next) => {
     res.locals.usuario = req.session.usuario || null;
-    res.locals.panelInfo = res.locals.panelInfo || {};
+    res.locals.panelInfo = req.session.panelInfo || { secciones: [] };
     next();
 });
 

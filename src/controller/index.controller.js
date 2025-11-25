@@ -71,7 +71,7 @@ export const autenticarUsuario = async function (req, res) {
                         botones: [
                             {
                                 nombre: "Amarres",
-                                link: "",
+                                link: "/amarre/lista",
                             },
                             {
                                 nombre: "Yates",

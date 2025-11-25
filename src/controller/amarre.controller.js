@@ -43,7 +43,11 @@ export const get = async (req, res) => {
         const objetosCons = await BD.getAll(); // array de usuarios
         console.log(objetosCons);
         // PASAR OBJETO: la clave objetosCons será la variable en EJS
-        res.render(`${nombreP}/Lista`, { objetosCons });
+        res.render(`${nombreP}/Lista`, {
+            objetosCons,
+            usuario: req.session.usuario,
+            panelInfo: req.session.panelInfo,
+        });
     } catch (err) {
         console.error(err);
         res.status(500).send("Error al obtener la lista de Amarre");
