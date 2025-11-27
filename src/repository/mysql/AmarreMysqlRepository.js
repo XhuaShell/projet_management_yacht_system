@@ -21,7 +21,7 @@ export class AmarreMysqlRepository extends RepositoryBase {
         return rows.map(
             (row) =>
                 new Amarre({
-                    num_amarre: int(row.num_amarre),
+                    num_amarre: Number(row.num_amarre),
                     id_zona: String(row.id_zona),
                     usuario_propietario_cedula: row.usuario_propietario_cedula
                         ? String(row.usuario_propietario_cedula)
